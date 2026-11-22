@@ -1,0 +1,33 @@
+# dependencies
+node_modules/
+
+# next.js
+.next/
+out/
+next-env.d.ts
+
+# testing
+coverage/
+playwright-report/
+test-results/
+
+# runtime data (SQLite snapshots, logs, generated host secret)
+var/
+.e2e-data/
+*.sqlite
+*.sqlite-journal
+*.log
+
+# secrets (SEC-16)
+.env
+.env.*
+!.env.example
+
+# tooling
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
+
+# copyrighted illustrated art: never publish
+assets/*.jpg
+public/art/

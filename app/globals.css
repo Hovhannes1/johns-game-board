@@ -1,0 +1,128 @@
+@import 'tailwindcss';
+
+/* Jewel-tone palette and type scale (section 4.1). Fonts are local stacks: no third-party calls (SEC-14). */
+@theme {
+  --color-felt-950: #0b0f0d;
+  --color-felt-900: #121a16;
+  --color-felt-800: #1a2620;
+  --color-parchment: #f3e9d2;
+  --color-brass: #c9a24a;
+
+  --color-gem-diamond: #f4f6fb;
+  --color-gem-sapphire: #2f5fd0;
+  --color-gem-emerald: #1f9d63;
+  --color-gem-ruby: #c8283c;
+  --color-gem-onyx: #2a2a30;
+  --color-gem-gold: #e8b931;
+
+  --font-display:
+    'Cormorant Garamond', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  min-height: 100dvh;
+  background:
+    radial-gradient(ellipse at center, rgb(255 255 255 / 0.04), transparent 65%),
+    var(--color-felt-950);
+  color: var(--color-parchment);
+  font-family: var(--font-sans);
+}
+
+/*
+ * Card sizes scale with the viewport; every card, noble and tableau column is
+ * sized in em from one of these:
+ *   --card-scale   face-up market cards and decks
+ *   --mine-scale   the viewer's own tableau (larger, it is what you play from)
+ *   --their-scale  opponents' tableaus
+ */
+:root {
+  --card-scale: clamp(7px, 2.5vw, 12.5px);
+  --mine-scale: clamp(6.5px, 1.95vw, 9.5px);
+  --their-scale: clamp(5.5px, 1.5vw, 7px);
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --card-scale: clamp(12.5px, 1.45vw, 16px);
+    --mine-scale: clamp(8px, 0.9vw, 10px);
+    --their-scale: 6.5px;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --card-scale: clamp(12px, 1.15vw, 18px);
+    --mine-scale: clamp(7.5px, 0.6vw, 11px);
+    --their-scale: clamp(5.5px, 0.44vw, 8px);
+  }
+}
+
+/*
+ * Table layout (4.1). The bank always sits under the cards. Chat comes before
+ * the game log.
+ *   phones:   board, players, side (chat, log)
+ *   laptops:  board + players | side
+ *   wide:     board | players | side
+ */
+.table-layout {
+  display: grid;
+  gap: 1rem;
+  align-items: start;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    'board'
+    'players'
+    'side';
+}
+
+.table-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-width: 0;
+}
+
+/* Never let the tray's hint text decide how wide the board column is. */
+.table-tray {
+  width: 0;
+  min-width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .table-layout {
+    grid-template-columns: minmax(0, 1fr) 17.5rem;
+    grid-template-areas:
+      'board side'
+      'players side';
+  }
+  .table-side {
+    position: sticky;
+    top: 1rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .table-layout {
+    grid-template-columns: auto minmax(0, 1fr) 17.5rem;
+    grid-template-areas: 'board players side';
+  }
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-brass);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

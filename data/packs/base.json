@@ -1,0 +1,1061 @@
+{
+  "format": "splendor-card-pack@1",
+  "id": "base",
+  "version": "1.0.0",
+  "name": "Splendor base game",
+  "provenance": {
+    "sources": [
+      {
+        "name": "comp90054",
+        "url": "https://raw.githubusercontent.com/P1ckl3Farty/COMP90054-2021S2-FinalProject/main/Splendor/splendor_utils.py",
+        "retrieved": "2026-11-06"
+      },
+      {
+        "name": "monk-time",
+        "url": "https://raw.githubusercontent.com/monk-time/splendor-fastest-win/master/cards.csv",
+        "retrieved": "2026-11-06"
+      },
+      {
+        "name": "reedstonefood",
+        "url": "https://raw.githubusercontent.com/reedstonefood/splendor_game/master/lib/splendor_game/load_cards.rb",
+        "retrieved": "2026-11-06"
+      }
+    ],
+    "crossCheck": "Cards identical across 3 sources; nobles identical across 2 sources.",
+    "review": "pending"
+  },
+  "cards": [
+    {
+      "id": "L1-diamond-01",
+      "level": 1,
+      "bonus": "diamond",
+      "points": 0,
+      "cost": {
+        "sapphire": 3
+      }
+    },
+    {
+      "id": "L1-diamond-02",
+      "level": 1,
+      "bonus": "diamond",
+      "points": 0,
+      "cost": {
+        "ruby": 2,
+        "onyx": 1
+      }
+    },
+    {
+      "id": "L1-diamond-03",
+      "level": 1,
+      "bonus": "diamond",
+      "points": 0,
+      "cost": {
+        "sapphire": 2,
+        "onyx": 2
+      }
+    },
+    {
+      "id": "L1-diamond-04",
+      "level": 1,
+      "bonus": "diamond",
+      "points": 0,
+      "cost": {
+        "sapphire": 1,
+        "emerald": 1,
+        "ruby": 1,
+        "onyx": 1
+      }
+    },
+    {
+      "id": "L1-diamond-05",
+      "level": 1,
+      "bonus": "diamond",
+      "points": 0,
+      "cost": {
+        "diamond": 3,
+        "sapphire": 1,
+        "onyx": 1
+      }
+    },
+    {
+      "id": "L1-diamond-06",
+      "level": 1,
+      "bonus": "diamond",
+      "points": 0,
+      "cost": {
+        "sapphire": 2,
+        "emerald": 2,
+        "onyx": 1
+      }
+    },
+    {
+      "id": "L1-diamond-07",
+      "level": 1,
+      "bonus": "diamond",
+      "points": 0,
+      "cost": {
+        "sapphire": 1,
+        "emerald": 2,
+        "ruby": 1,
+        "onyx": 1
+      }
+    },
+    {
+      "id": "L1-diamond-08",
+      "level": 1,
+      "bonus": "diamond",
+      "points": 1,
+      "cost": {
+        "emerald": 4
+      }
+    },
+    {
+      "id": "L1-sapphire-01",
+      "level": 1,
+      "bonus": "sapphire",
+      "points": 0,
+      "cost": {
+        "diamond": 1,
+        "onyx": 2
+      }
+    },
+    {
+      "id": "L1-sapphire-02",
+      "level": 1,
+      "bonus": "sapphire",
+      "points": 0,
+      "cost": {
+        "onyx": 3
+      }
+    },
+    {
+      "id": "L1-sapphire-03",
+      "level": 1,
+      "bonus": "sapphire",
+      "points": 0,
+      "cost": {
+        "diamond": 1,
+        "emerald": 1,
+        "ruby": 1,
+        "onyx": 1
+      }
+    },
+    {
+      "id": "L1-sapphire-04",
+      "level": 1,
+      "bonus": "sapphire",
+      "points": 0,
+      "cost": {
+        "emerald": 2,
+        "onyx": 2
+      }
+    },
+    {
+      "id": "L1-sapphire-05",
+      "level": 1,
+      "bonus": "sapphire",
+      "points": 0,
+      "cost": {
+        "diamond": 1,
+        "emerald": 2,
+        "ruby": 2
+      }
+    },
+    {
+      "id": "L1-sapphire-06",
+      "level": 1,
+      "bonus": "sapphire",
+      "points": 0,
+      "cost": {
+        "diamond": 1,
+        "emerald": 1,
+        "ruby": 2,
+        "onyx": 1
+      }
+    },
+    {
+      "id": "L1-sapphire-07",
+      "level": 1,
+      "bonus": "sapphire",
+      "points": 0,
+      "cost": {
+        "sapphire": 1,
+        "emerald": 3,
+        "ruby": 1
+      }
+    },
+    {
+      "id": "L1-sapphire-08",
+      "level": 1,
+      "bonus": "sapphire",
+      "points": 1,
+      "cost": {
+        "ruby": 4
+      }
+    },
+    {
+      "id": "L1-emerald-01",
+      "level": 1,
+      "bonus": "emerald",
+      "points": 0,
+      "cost": {
+        "diamond": 2,
+        "sapphire": 1
+      }
+    },
+    {
+      "id": "L1-emerald-02",
+      "level": 1,
+      "bonus": "emerald",
+      "points": 0,
+      "cost": {
+        "ruby": 3
+      }
+    },
+    {
+      "id": "L1-emerald-03",
+      "level": 1,
+      "bonus": "emerald",
+      "points": 0,
+      "cost": {
+        "diamond": 1,
+        "sapphire": 1,
+        "ruby": 1,
+        "onyx": 1
+      }
+    },
+    {
+      "id": "L1-emerald-04",
+      "level": 1,
+      "bonus": "emerald",
+      "points": 0,
+      "cost": {
+        "sapphire": 2,
+        "ruby": 2
+      }
+    },
+    {
+      "id": "L1-emerald-05",
+      "level": 1,
+      "bonus": "emerald",
+      "points": 0,
+      "cost": {
+        "diamond": 1,
+        "sapphire": 3,
+        "emerald": 1
+      }
+    },
+    {
+      "id": "L1-emerald-06",
+      "level": 1,
+      "bonus": "emerald",
+      "points": 0,
+      "cost": {
+        "diamond": 1,
+        "sapphire": 1,
+        "ruby": 1,
+        "onyx": 2
+      }
+    },
+    {
+      "id": "L1-emerald-07",
+      "level": 1,
+      "bonus": "emerald",
+      "points": 0,
+      "cost": {
+        "sapphire": 1,
+        "ruby": 2,
+        "onyx": 2
+      }
+    },
+    {
+      "id": "L1-emerald-08",
+      "level": 1,
+      "bonus": "emerald",
+      "points": 1,
+      "cost": {
+        "onyx": 4
+      }
+    },
+    {
+      "id": "L1-ruby-01",
+      "level": 1,
+      "bonus": "ruby",
+      "points": 0,
+      "cost": {
+        "diamond": 3
+      }
+    },
+    {
+      "id": "L1-ruby-02",
+      "level": 1,
+      "bonus": "ruby",
+      "points": 0,
+      "cost": {
+        "sapphire": 2,
+        "emerald": 1
+      }
+    },
+    {
+      "id": "L1-ruby-03",
+      "level": 1,
+      "bonus": "ruby",
+      "points": 0,
+      "cost": {
+        "diamond": 2,
+        "ruby": 2
+      }
+    },
+    {
+      "id": "L1-ruby-04",
+      "level": 1,
+      "bonus": "ruby",
+      "points": 0,
+      "cost": {
+        "diamond": 1,
+        "sapphire": 1,
+        "emerald": 1,
+        "onyx": 1
+      }
+    },
+    {
+      "id": "L1-ruby-05",
+      "level": 1,
+      "bonus": "ruby",
+      "points": 0,
+      "cost": {
+        "diamond": 2,
+        "sapphire": 1,
+        "emerald": 1,
+        "onyx": 1
+      }
+    },
+    {
+      "id": "L1-ruby-06",
+      "level": 1,
+      "bonus": "ruby",
+      "points": 0,
+      "cost": {
+        "diamond": 2,
+        "emerald": 1,
+        "onyx": 2
+      }
+    },
+    {
+      "id": "L1-ruby-07",
+      "level": 1,
+      "bonus": "ruby",
+      "points": 0,
+      "cost": {
+        "diamond": 1,
+        "ruby": 1,
+        "onyx": 3
+      }
+    },
+    {
+      "id": "L1-ruby-08",
+      "level": 1,
+      "bonus": "ruby",
+      "points": 1,
+      "cost": {
+        "diamond": 4
+      }
+    },
+    {
+      "id": "L1-onyx-01",
+      "level": 1,
+      "bonus": "onyx",
+      "points": 0,
+      "cost": {
+        "emerald": 3
+      }
+    },
+    {
+      "id": "L1-onyx-02",
+      "level": 1,
+      "bonus": "onyx",
+      "points": 0,
+      "cost": {
+        "emerald": 2,
+        "ruby": 1
+      }
+    },
+    {
+      "id": "L1-onyx-03",
+      "level": 1,
+      "bonus": "onyx",
+      "points": 0,
+      "cost": {
+        "diamond": 2,
+        "emerald": 2
+      }
+    },
+    {
+      "id": "L1-onyx-04",
+      "level": 1,
+      "bonus": "onyx",
+      "points": 0,
+      "cost": {
+        "diamond": 1,
+        "sapphire": 1,
+        "emerald": 1,
+        "ruby": 1
+      }
+    },
+    {
+      "id": "L1-onyx-05",
+      "level": 1,
+      "bonus": "onyx",
+      "points": 0,
+      "cost": {
+        "diamond": 2,
+        "sapphire": 2,
+        "ruby": 1
+      }
+    },
+    {
+      "id": "L1-onyx-06",
+      "level": 1,
+      "bonus": "onyx",
+      "points": 0,
+      "cost": {
+        "diamond": 1,
+        "sapphire": 2,
+        "emerald": 1,
+        "ruby": 1
+      }
+    },
+    {
+      "id": "L1-onyx-07",
+      "level": 1,
+      "bonus": "onyx",
+      "points": 0,
+      "cost": {
+        "emerald": 1,
+        "ruby": 3,
+        "onyx": 1
+      }
+    },
+    {
+      "id": "L1-onyx-08",
+      "level": 1,
+      "bonus": "onyx",
+      "points": 1,
+      "cost": {
+        "sapphire": 4
+      }
+    },
+    {
+      "id": "L2-diamond-01",
+      "level": 2,
+      "bonus": "diamond",
+      "points": 1,
+      "cost": {
+        "emerald": 3,
+        "ruby": 2,
+        "onyx": 2
+      }
+    },
+    {
+      "id": "L2-diamond-02",
+      "level": 2,
+      "bonus": "diamond",
+      "points": 1,
+      "cost": {
+        "diamond": 2,
+        "sapphire": 3,
+        "ruby": 3
+      }
+    },
+    {
+      "id": "L2-diamond-03",
+      "level": 2,
+      "bonus": "diamond",
+      "points": 2,
+      "cost": {
+        "ruby": 5
+      }
+    },
+    {
+      "id": "L2-diamond-04",
+      "level": 2,
+      "bonus": "diamond",
+      "points": 2,
+      "cost": {
+        "emerald": 1,
+        "ruby": 4,
+        "onyx": 2
+      }
+    },
+    {
+      "id": "L2-diamond-05",
+      "level": 2,
+      "bonus": "diamond",
+      "points": 2,
+      "cost": {
+        "ruby": 5,
+        "onyx": 3
+      }
+    },
+    {
+      "id": "L2-diamond-06",
+      "level": 2,
+      "bonus": "diamond",
+      "points": 3,
+      "cost": {
+        "diamond": 6
+      }
+    },
+    {
+      "id": "L2-sapphire-01",
+      "level": 2,
+      "bonus": "sapphire",
+      "points": 1,
+      "cost": {
+        "sapphire": 2,
+        "emerald": 2,
+        "ruby": 3
+      }
+    },
+    {
+      "id": "L2-sapphire-02",
+      "level": 2,
+      "bonus": "sapphire",
+      "points": 1,
+      "cost": {
+        "sapphire": 2,
+        "emerald": 3,
+        "onyx": 3
+      }
+    },
+    {
+      "id": "L2-sapphire-03",
+      "level": 2,
+      "bonus": "sapphire",
+      "points": 2,
+      "cost": {
+        "sapphire": 5
+      }
+    },
+    {
+      "id": "L2-sapphire-04",
+      "level": 2,
+      "bonus": "sapphire",
+      "points": 2,
+      "cost": {
+        "diamond": 2,
+        "ruby": 1,
+        "onyx": 4
+      }
+    },
+    {
+      "id": "L2-sapphire-05",
+      "level": 2,
+      "bonus": "sapphire",
+      "points": 2,
+      "cost": {
+        "diamond": 5,
+        "sapphire": 3
+      }
+    },
+    {
+      "id": "L2-sapphire-06",
+      "level": 2,
+      "bonus": "sapphire",
+      "points": 3,
+      "cost": {
+        "sapphire": 6
+      }
+    },
+    {
+      "id": "L2-emerald-01",
+      "level": 2,
+      "bonus": "emerald",
+      "points": 1,
+      "cost": {
+        "diamond": 2,
+        "sapphire": 3,
+        "onyx": 2
+      }
+    },
+    {
+      "id": "L2-emerald-02",
+      "level": 2,
+      "bonus": "emerald",
+      "points": 1,
+      "cost": {
+        "diamond": 3,
+        "emerald": 2,
+        "ruby": 3
+      }
+    },
+    {
+      "id": "L2-emerald-03",
+      "level": 2,
+      "bonus": "emerald",
+      "points": 2,
+      "cost": {
+        "emerald": 5
+      }
+    },
+    {
+      "id": "L2-emerald-04",
+      "level": 2,
+      "bonus": "emerald",
+      "points": 2,
+      "cost": {
+        "diamond": 4,
+        "sapphire": 2,
+        "onyx": 1
+      }
+    },
+    {
+      "id": "L2-emerald-05",
+      "level": 2,
+      "bonus": "emerald",
+      "points": 2,
+      "cost": {
+        "sapphire": 5,
+        "emerald": 3
+      }
+    },
+    {
+      "id": "L2-emerald-06",
+      "level": 2,
+      "bonus": "emerald",
+      "points": 3,
+      "cost": {
+        "emerald": 6
+      }
+    },
+    {
+      "id": "L2-ruby-01",
+      "level": 2,
+      "bonus": "ruby",
+      "points": 1,
+      "cost": {
+        "diamond": 2,
+        "ruby": 2,
+        "onyx": 3
+      }
+    },
+    {
+      "id": "L2-ruby-02",
+      "level": 2,
+      "bonus": "ruby",
+      "points": 1,
+      "cost": {
+        "sapphire": 3,
+        "ruby": 2,
+        "onyx": 3
+      }
+    },
+    {
+      "id": "L2-ruby-03",
+      "level": 2,
+      "bonus": "ruby",
+      "points": 2,
+      "cost": {
+        "onyx": 5
+      }
+    },
+    {
+      "id": "L2-ruby-04",
+      "level": 2,
+      "bonus": "ruby",
+      "points": 2,
+      "cost": {
+        "diamond": 1,
+        "sapphire": 4,
+        "emerald": 2
+      }
+    },
+    {
+      "id": "L2-ruby-05",
+      "level": 2,
+      "bonus": "ruby",
+      "points": 2,
+      "cost": {
+        "diamond": 3,
+        "onyx": 5
+      }
+    },
+    {
+      "id": "L2-ruby-06",
+      "level": 2,
+      "bonus": "ruby",
+      "points": 3,
+      "cost": {
+        "ruby": 6
+      }
+    },
+    {
+      "id": "L2-onyx-01",
+      "level": 2,
+      "bonus": "onyx",
+      "points": 1,
+      "cost": {
+        "diamond": 3,
+        "sapphire": 2,
+        "emerald": 2
+      }
+    },
+    {
+      "id": "L2-onyx-02",
+      "level": 2,
+      "bonus": "onyx",
+      "points": 1,
+      "cost": {
+        "diamond": 3,
+        "emerald": 3,
+        "onyx": 2
+      }
+    },
+    {
+      "id": "L2-onyx-03",
+      "level": 2,
+      "bonus": "onyx",
+      "points": 2,
+      "cost": {
+        "diamond": 5
+      }
+    },
+    {
+      "id": "L2-onyx-04",
+      "level": 2,
+      "bonus": "onyx",
+      "points": 2,
+      "cost": {
+        "sapphire": 1,
+        "emerald": 4,
+        "ruby": 2
+      }
+    },
+    {
+      "id": "L2-onyx-05",
+      "level": 2,
+      "bonus": "onyx",
+      "points": 2,
+      "cost": {
+        "emerald": 5,
+        "ruby": 3
+      }
+    },
+    {
+      "id": "L2-onyx-06",
+      "level": 2,
+      "bonus": "onyx",
+      "points": 3,
+      "cost": {
+        "onyx": 6
+      }
+    },
+    {
+      "id": "L3-diamond-01",
+      "level": 3,
+      "bonus": "diamond",
+      "points": 3,
+      "cost": {
+        "sapphire": 3,
+        "emerald": 3,
+        "ruby": 5,
+        "onyx": 3
+      }
+    },
+    {
+      "id": "L3-diamond-02",
+      "level": 3,
+      "bonus": "diamond",
+      "points": 4,
+      "cost": {
+        "onyx": 7
+      }
+    },
+    {
+      "id": "L3-diamond-03",
+      "level": 3,
+      "bonus": "diamond",
+      "points": 4,
+      "cost": {
+        "diamond": 3,
+        "ruby": 3,
+        "onyx": 6
+      }
+    },
+    {
+      "id": "L3-diamond-04",
+      "level": 3,
+      "bonus": "diamond",
+      "points": 5,
+      "cost": {
+        "diamond": 3,
+        "onyx": 7
+      }
+    },
+    {
+      "id": "L3-sapphire-01",
+      "level": 3,
+      "bonus": "sapphire",
+      "points": 3,
+      "cost": {
+        "diamond": 3,
+        "emerald": 3,
+        "ruby": 3,
+        "onyx": 5
+      }
+    },
+    {
+      "id": "L3-sapphire-02",
+      "level": 3,
+      "bonus": "sapphire",
+      "points": 4,
+      "cost": {
+        "diamond": 7
+      }
+    },
+    {
+      "id": "L3-sapphire-03",
+      "level": 3,
+      "bonus": "sapphire",
+      "points": 4,
+      "cost": {
+        "diamond": 6,
+        "sapphire": 3,
+        "onyx": 3
+      }
+    },
+    {
+      "id": "L3-sapphire-04",
+      "level": 3,
+      "bonus": "sapphire",
+      "points": 5,
+      "cost": {
+        "diamond": 7,
+        "sapphire": 3
+      }
+    },
+    {
+      "id": "L3-emerald-01",
+      "level": 3,
+      "bonus": "emerald",
+      "points": 3,
+      "cost": {
+        "diamond": 5,
+        "sapphire": 3,
+        "ruby": 3,
+        "onyx": 3
+      }
+    },
+    {
+      "id": "L3-emerald-02",
+      "level": 3,
+      "bonus": "emerald",
+      "points": 4,
+      "cost": {
+        "sapphire": 7
+      }
+    },
+    {
+      "id": "L3-emerald-03",
+      "level": 3,
+      "bonus": "emerald",
+      "points": 4,
+      "cost": {
+        "diamond": 3,
+        "sapphire": 6,
+        "emerald": 3
+      }
+    },
+    {
+      "id": "L3-emerald-04",
+      "level": 3,
+      "bonus": "emerald",
+      "points": 5,
+      "cost": {
+        "sapphire": 7,
+        "emerald": 3
+      }
+    },
+    {
+      "id": "L3-ruby-01",
+      "level": 3,
+      "bonus": "ruby",
+      "points": 3,
+      "cost": {
+        "diamond": 3,
+        "sapphire": 5,
+        "emerald": 3,
+        "onyx": 3
+      }
+    },
+    {
+      "id": "L3-ruby-02",
+      "level": 3,
+      "bonus": "ruby",
+      "points": 4,
+      "cost": {
+        "emerald": 7
+      }
+    },
+    {
+      "id": "L3-ruby-03",
+      "level": 3,
+      "bonus": "ruby",
+      "points": 4,
+      "cost": {
+        "sapphire": 3,
+        "emerald": 6,
+        "ruby": 3
+      }
+    },
+    {
+      "id": "L3-ruby-04",
+      "level": 3,
+      "bonus": "ruby",
+      "points": 5,
+      "cost": {
+        "emerald": 7,
+        "ruby": 3
+      }
+    },
+    {
+      "id": "L3-onyx-01",
+      "level": 3,
+      "bonus": "onyx",
+      "points": 3,
+      "cost": {
+        "diamond": 3,
+        "sapphire": 3,
+        "emerald": 5,
+        "ruby": 3
+      }
+    },
+    {
+      "id": "L3-onyx-02",
+      "level": 3,
+      "bonus": "onyx",
+      "points": 4,
+      "cost": {
+        "ruby": 7
+      }
+    },
+    {
+      "id": "L3-onyx-03",
+      "level": 3,
+      "bonus": "onyx",
+      "points": 4,
+      "cost": {
+        "emerald": 3,
+        "ruby": 6,
+        "onyx": 3
+      }
+    },
+    {
+      "id": "L3-onyx-04",
+      "level": 3,
+      "bonus": "onyx",
+      "points": 5,
+      "cost": {
+        "ruby": 7,
+        "onyx": 3
+      }
+    }
+  ],
+  "nobles": [
+    {
+      "id": "N01",
+      "name": "The Doge of Venice",
+      "points": 3,
+      "requires": {
+        "diamond": 3,
+        "sapphire": 3,
+        "emerald": 3
+      }
+    },
+    {
+      "id": "N02",
+      "name": "The Duchess of Milan",
+      "points": 3,
+      "requires": {
+        "diamond": 3,
+        "sapphire": 3,
+        "onyx": 3
+      }
+    },
+    {
+      "id": "N03",
+      "name": "The Prince of Florence",
+      "points": 3,
+      "requires": {
+        "diamond": 3,
+        "ruby": 3,
+        "onyx": 3
+      }
+    },
+    {
+      "id": "N04",
+      "name": "The Countess of Flanders",
+      "points": 3,
+      "requires": {
+        "sapphire": 3,
+        "emerald": 3,
+        "ruby": 3
+      }
+    },
+    {
+      "id": "N05",
+      "name": "The Margrave of Ferrara",
+      "points": 3,
+      "requires": {
+        "emerald": 3,
+        "ruby": 3,
+        "onyx": 3
+      }
+    },
+    {
+      "id": "N06",
+      "name": "The Archduchess of Styria",
+      "points": 3,
+      "requires": {
+        "diamond": 4,
+        "sapphire": 4
+      }
+    },
+    {
+      "id": "N07",
+      "name": "The Banker of Genoa",
+      "points": 3,
+      "requires": {
+        "diamond": 4,
+        "onyx": 4
+      }
+    },
+    {
+      "id": "N08",
+      "name": "The Cardinal of Siena",
+      "points": 3,
+      "requires": {
+        "sapphire": 4,
+        "emerald": 4
+      }
+    },
+    {
+      "id": "N09",
+      "name": "The Marquise of Mantua",
+      "points": 3,
+      "requires": {
+        "emerald": 4,
+        "ruby": 4
+      }
+    },
+    {
+      "id": "N10",
+      "name": "The Elector of Saxony",
+      "points": 3,
+      "requires": {
+        "ruby": 4,
+        "onyx": 4
+      }
+    }
+  ]
+}

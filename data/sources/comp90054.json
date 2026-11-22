@@ -1,0 +1,930 @@
+{
+  "name": "comp90054",
+  "url": "https://raw.githubusercontent.com/P1ckl3Farty/COMP90054-2021S2-FinalProject/main/Splendor/splendor_utils.py",
+  "retrieved": "2026-11-06",
+  "notes": "Explicit deck id and points per card; nobles listed without points (all worth 3).",
+  "cards": [
+    {
+      "bonus": "onyx",
+      "cost": {
+        "emerald": 1,
+        "diamond": 1,
+        "ruby": 1,
+        "sapphire": 1
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "onyx",
+      "cost": {
+        "emerald": 1,
+        "diamond": 1,
+        "ruby": 1,
+        "sapphire": 2
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "onyx",
+      "cost": {
+        "sapphire": 2,
+        "ruby": 1,
+        "diamond": 2
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "onyx",
+      "cost": {
+        "sapphire": 2,
+        "emerald": 2,
+        "diamond": 3
+      },
+      "level": 2,
+      "points": 1
+    },
+    {
+      "bonus": "onyx",
+      "cost": {
+        "emerald": 2,
+        "ruby": 1
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "onyx",
+      "cost": {
+        "diamond": 2,
+        "emerald": 2
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "onyx",
+      "cost": {
+        "emerald": 3
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "onyx",
+      "cost": {
+        "emerald": 3,
+        "onyx": 2,
+        "diamond": 3
+      },
+      "level": 2,
+      "points": 1
+    },
+    {
+      "bonus": "onyx",
+      "cost": {
+        "ruby": 3,
+        "onyx": 1,
+        "emerald": 1
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "onyx",
+      "cost": {
+        "sapphire": 4
+      },
+      "level": 1,
+      "points": 1
+    },
+    {
+      "bonus": "onyx",
+      "cost": {
+        "emerald": 4,
+        "ruby": 2,
+        "sapphire": 1
+      },
+      "level": 2,
+      "points": 2
+    },
+    {
+      "bonus": "onyx",
+      "cost": {
+        "emerald": 5,
+        "ruby": 3
+      },
+      "level": 2,
+      "points": 2
+    },
+    {
+      "bonus": "onyx",
+      "cost": {
+        "emerald": 5,
+        "diamond": 3,
+        "ruby": 3,
+        "sapphire": 3
+      },
+      "level": 3,
+      "points": 3
+    },
+    {
+      "bonus": "onyx",
+      "cost": {
+        "diamond": 5
+      },
+      "level": 2,
+      "points": 2
+    },
+    {
+      "bonus": "onyx",
+      "cost": {
+        "onyx": 6
+      },
+      "level": 2,
+      "points": 3
+    },
+    {
+      "bonus": "onyx",
+      "cost": {
+        "ruby": 6,
+        "onyx": 3,
+        "emerald": 3
+      },
+      "level": 3,
+      "points": 4
+    },
+    {
+      "bonus": "onyx",
+      "cost": {
+        "ruby": 7
+      },
+      "level": 3,
+      "points": 4
+    },
+    {
+      "bonus": "onyx",
+      "cost": {
+        "ruby": 7,
+        "onyx": 3
+      },
+      "level": 3,
+      "points": 5
+    },
+    {
+      "bonus": "sapphire",
+      "cost": {
+        "ruby": 1,
+        "diamond": 1,
+        "onyx": 1,
+        "emerald": 1
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "sapphire",
+      "cost": {
+        "ruby": 1,
+        "onyx": 4,
+        "diamond": 2
+      },
+      "level": 2,
+      "points": 2
+    },
+    {
+      "bonus": "sapphire",
+      "cost": {
+        "diamond": 1,
+        "onyx": 2
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "sapphire",
+      "cost": {
+        "emerald": 2,
+        "onyx": 2
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "sapphire",
+      "cost": {
+        "emerald": 2,
+        "ruby": 2,
+        "diamond": 1
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "sapphire",
+      "cost": {
+        "emerald": 2,
+        "ruby": 3,
+        "sapphire": 2
+      },
+      "level": 2,
+      "points": 1
+    },
+    {
+      "bonus": "sapphire",
+      "cost": {
+        "ruby": 2,
+        "diamond": 1,
+        "onyx": 1,
+        "emerald": 1
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "sapphire",
+      "cost": {
+        "onyx": 3
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "sapphire",
+      "cost": {
+        "sapphire": 3,
+        "onyx": 3,
+        "diamond": 6
+      },
+      "level": 3,
+      "points": 4
+    },
+    {
+      "bonus": "sapphire",
+      "cost": {
+        "emerald": 3,
+        "ruby": 1,
+        "sapphire": 1
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "sapphire",
+      "cost": {
+        "emerald": 3,
+        "onyx": 3,
+        "sapphire": 2
+      },
+      "level": 2,
+      "points": 1
+    },
+    {
+      "bonus": "sapphire",
+      "cost": {
+        "ruby": 3,
+        "diamond": 3,
+        "onyx": 5,
+        "emerald": 3
+      },
+      "level": 3,
+      "points": 3
+    },
+    {
+      "bonus": "sapphire",
+      "cost": {
+        "ruby": 4
+      },
+      "level": 1,
+      "points": 1
+    },
+    {
+      "bonus": "sapphire",
+      "cost": {
+        "sapphire": 5
+      },
+      "level": 2,
+      "points": 2
+    },
+    {
+      "bonus": "sapphire",
+      "cost": {
+        "diamond": 5,
+        "sapphire": 3
+      },
+      "level": 2,
+      "points": 2
+    },
+    {
+      "bonus": "sapphire",
+      "cost": {
+        "sapphire": 6
+      },
+      "level": 2,
+      "points": 3
+    },
+    {
+      "bonus": "sapphire",
+      "cost": {
+        "diamond": 7
+      },
+      "level": 3,
+      "points": 4
+    },
+    {
+      "bonus": "sapphire",
+      "cost": {
+        "diamond": 7,
+        "sapphire": 3
+      },
+      "level": 3,
+      "points": 5
+    },
+    {
+      "bonus": "emerald",
+      "cost": {
+        "ruby": 1,
+        "diamond": 1,
+        "onyx": 1,
+        "sapphire": 1
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "emerald",
+      "cost": {
+        "ruby": 1,
+        "diamond": 1,
+        "onyx": 2,
+        "sapphire": 1
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "emerald",
+      "cost": {
+        "sapphire": 2,
+        "onyx": 1,
+        "diamond": 4
+      },
+      "level": 2,
+      "points": 2
+    },
+    {
+      "bonus": "emerald",
+      "cost": {
+        "sapphire": 2,
+        "ruby": 2
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "emerald",
+      "cost": {
+        "emerald": 2,
+        "ruby": 3,
+        "diamond": 3
+      },
+      "level": 2,
+      "points": 1
+    },
+    {
+      "bonus": "emerald",
+      "cost": {
+        "ruby": 2,
+        "onyx": 2,
+        "sapphire": 1
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "emerald",
+      "cost": {
+        "diamond": 2,
+        "sapphire": 1
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "emerald",
+      "cost": {
+        "sapphire": 3,
+        "emerald": 1,
+        "diamond": 1
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "emerald",
+      "cost": {
+        "sapphire": 3,
+        "onyx": 2,
+        "diamond": 2
+      },
+      "level": 2,
+      "points": 1
+    },
+    {
+      "bonus": "emerald",
+      "cost": {
+        "ruby": 3
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "emerald",
+      "cost": {
+        "ruby": 3,
+        "diamond": 5,
+        "onyx": 3,
+        "sapphire": 3
+      },
+      "level": 3,
+      "points": 3
+    },
+    {
+      "bonus": "emerald",
+      "cost": {
+        "onyx": 4
+      },
+      "level": 1,
+      "points": 1
+    },
+    {
+      "bonus": "emerald",
+      "cost": {
+        "sapphire": 5,
+        "emerald": 3
+      },
+      "level": 2,
+      "points": 2
+    },
+    {
+      "bonus": "emerald",
+      "cost": {
+        "emerald": 5
+      },
+      "level": 2,
+      "points": 2
+    },
+    {
+      "bonus": "emerald",
+      "cost": {
+        "sapphire": 6,
+        "emerald": 3,
+        "diamond": 3
+      },
+      "level": 3,
+      "points": 4
+    },
+    {
+      "bonus": "emerald",
+      "cost": {
+        "emerald": 6
+      },
+      "level": 2,
+      "points": 3
+    },
+    {
+      "bonus": "emerald",
+      "cost": {
+        "sapphire": 7
+      },
+      "level": 3,
+      "points": 4
+    },
+    {
+      "bonus": "emerald",
+      "cost": {
+        "sapphire": 7,
+        "emerald": 3
+      },
+      "level": 3,
+      "points": 5
+    },
+    {
+      "bonus": "ruby",
+      "cost": {
+        "emerald": 1,
+        "diamond": 1,
+        "onyx": 1,
+        "sapphire": 1
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "ruby",
+      "cost": {
+        "emerald": 1,
+        "onyx": 2,
+        "diamond": 2
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "ruby",
+      "cost": {
+        "emerald": 1,
+        "diamond": 2,
+        "onyx": 1,
+        "sapphire": 1
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "ruby",
+      "cost": {
+        "ruby": 1,
+        "onyx": 3,
+        "diamond": 1
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "ruby",
+      "cost": {
+        "sapphire": 2,
+        "emerald": 1
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "ruby",
+      "cost": {
+        "ruby": 2,
+        "onyx": 3,
+        "diamond": 2
+      },
+      "level": 2,
+      "points": 1
+    },
+    {
+      "bonus": "ruby",
+      "cost": {
+        "ruby": 2,
+        "onyx": 3,
+        "sapphire": 3
+      },
+      "level": 2,
+      "points": 1
+    },
+    {
+      "bonus": "ruby",
+      "cost": {
+        "diamond": 2,
+        "ruby": 2
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "ruby",
+      "cost": {
+        "emerald": 3,
+        "diamond": 3,
+        "onyx": 3,
+        "sapphire": 5
+      },
+      "level": 3,
+      "points": 3
+    },
+    {
+      "bonus": "ruby",
+      "cost": {
+        "diamond": 3
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "ruby",
+      "cost": {
+        "diamond": 3,
+        "onyx": 5
+      },
+      "level": 2,
+      "points": 2
+    },
+    {
+      "bonus": "ruby",
+      "cost": {
+        "sapphire": 4,
+        "emerald": 2,
+        "diamond": 1
+      },
+      "level": 2,
+      "points": 2
+    },
+    {
+      "bonus": "ruby",
+      "cost": {
+        "diamond": 4
+      },
+      "level": 1,
+      "points": 1
+    },
+    {
+      "bonus": "ruby",
+      "cost": {
+        "onyx": 5
+      },
+      "level": 2,
+      "points": 2
+    },
+    {
+      "bonus": "ruby",
+      "cost": {
+        "emerald": 6,
+        "ruby": 3,
+        "sapphire": 3
+      },
+      "level": 3,
+      "points": 4
+    },
+    {
+      "bonus": "ruby",
+      "cost": {
+        "ruby": 6
+      },
+      "level": 2,
+      "points": 3
+    },
+    {
+      "bonus": "ruby",
+      "cost": {
+        "emerald": 7
+      },
+      "level": 3,
+      "points": 4
+    },
+    {
+      "bonus": "ruby",
+      "cost": {
+        "emerald": 7,
+        "ruby": 3
+      },
+      "level": 3,
+      "points": 5
+    },
+    {
+      "bonus": "diamond",
+      "cost": {
+        "sapphire": 1,
+        "onyx": 1,
+        "diamond": 3
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "diamond",
+      "cost": {
+        "ruby": 1,
+        "sapphire": 1,
+        "onyx": 1,
+        "emerald": 1
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "diamond",
+      "cost": {
+        "ruby": 1,
+        "sapphire": 1,
+        "onyx": 1,
+        "emerald": 2
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "diamond",
+      "cost": {
+        "sapphire": 2,
+        "onyx": 2
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "diamond",
+      "cost": {
+        "emerald": 2,
+        "onyx": 1,
+        "sapphire": 2
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "diamond",
+      "cost": {
+        "ruby": 2,
+        "onyx": 1
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "diamond",
+      "cost": {
+        "ruby": 2,
+        "onyx": 2,
+        "emerald": 3
+      },
+      "level": 2,
+      "points": 1
+    },
+    {
+      "bonus": "diamond",
+      "cost": {
+        "sapphire": 3
+      },
+      "level": 1,
+      "points": 0
+    },
+    {
+      "bonus": "diamond",
+      "cost": {
+        "sapphire": 3,
+        "ruby": 3,
+        "diamond": 2
+      },
+      "level": 2,
+      "points": 1
+    },
+    {
+      "bonus": "diamond",
+      "cost": {
+        "ruby": 3,
+        "onyx": 6,
+        "diamond": 3
+      },
+      "level": 3,
+      "points": 4
+    },
+    {
+      "bonus": "diamond",
+      "cost": {
+        "diamond": 3,
+        "onyx": 7
+      },
+      "level": 3,
+      "points": 5
+    },
+    {
+      "bonus": "diamond",
+      "cost": {
+        "emerald": 4
+      },
+      "level": 1,
+      "points": 1
+    },
+    {
+      "bonus": "diamond",
+      "cost": {
+        "ruby": 4,
+        "onyx": 2,
+        "emerald": 1
+      },
+      "level": 2,
+      "points": 2
+    },
+    {
+      "bonus": "diamond",
+      "cost": {
+        "ruby": 5
+      },
+      "level": 2,
+      "points": 2
+    },
+    {
+      "bonus": "diamond",
+      "cost": {
+        "ruby": 5,
+        "onyx": 3
+      },
+      "level": 2,
+      "points": 2
+    },
+    {
+      "bonus": "diamond",
+      "cost": {
+        "ruby": 5,
+        "sapphire": 3,
+        "onyx": 3,
+        "emerald": 3
+      },
+      "level": 3,
+      "points": 3
+    },
+    {
+      "bonus": "diamond",
+      "cost": {
+        "diamond": 6
+      },
+      "level": 2,
+      "points": 3
+    },
+    {
+      "bonus": "diamond",
+      "cost": {
+        "onyx": 7
+      },
+      "level": 3,
+      "points": 4
+    }
+  ],
+  "nobles": [
+    {
+      "points": 3,
+      "requires": {
+        "emerald": 4,
+        "ruby": 4
+      }
+    },
+    {
+      "points": 3,
+      "requires": {
+        "diamond": 3,
+        "ruby": 3,
+        "onyx": 3
+      }
+    },
+    {
+      "points": 3,
+      "requires": {
+        "sapphire": 3,
+        "emerald": 3,
+        "ruby": 3
+      }
+    },
+    {
+      "points": 3,
+      "requires": {
+        "diamond": 3,
+        "sapphire": 3,
+        "emerald": 3
+      }
+    },
+    {
+      "points": 3,
+      "requires": {
+        "diamond": 4,
+        "sapphire": 4
+      }
+    },
+    {
+      "points": 3,
+      "requires": {
+        "diamond": 4,
+        "onyx": 4
+      }
+    },
+    {
+      "points": 3,
+      "requires": {
+        "diamond": 3,
+        "sapphire": 3,
+        "onyx": 3
+      }
+    },
+    {
+      "points": 3,
+      "requires": {
+        "ruby": 4,
+        "onyx": 4
+      }
+    },
+    {
+      "points": 3,
+      "requires": {
+        "sapphire": 4,
+        "emerald": 4
+      }
+    },
+    {
+      "points": 3,
+      "requires": {
+        "emerald": 3,
+        "ruby": 3,
+        "onyx": 3
+      }
+    }
+  ]
+}
