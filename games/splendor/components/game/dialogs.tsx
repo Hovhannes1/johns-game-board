@@ -1,8 +1,20 @@
 'use client';
 
 import { useState } from 'react';
-import { computePayment, explainIntentForViewer, sumCounts, TOKEN_COLORS } from '@/games/splendor/engine';
-import type { ActionIntent, CardDef, GameView, Level, RuleError, TokenColor } from '@/games/splendor/engine';
+import {
+  computePayment,
+  explainIntentForViewer,
+  sumCounts,
+  TOKEN_COLORS,
+} from '@/games/splendor/engine';
+import type {
+  ActionIntent,
+  CardDef,
+  GameView,
+  Level,
+  RuleError,
+  TokenColor,
+} from '@/games/splendor/engine';
 import { CardBack, CardFace } from '@/games/splendor/components/art/CardArt';
 import { NobleTile } from '@/games/splendor/components/art/NobleArt';
 import { TokenChip } from '@/games/splendor/components/art/TokenChip';

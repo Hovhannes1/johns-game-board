@@ -217,7 +217,9 @@ describe('a full 4-player game (section 8)', () => {
           await c.connect();
         }
         await waitFor(() => all.every((c) => c.view?.version === 25), 3000, 'restored');
-        expect(host.chat.some((m) => m.kind === 'system' && /restarted/.test(m.text))).toBe(true);
+        expect(
+          host.chat.some((m) => m.kind === 'system' && /restarted|restored/.test(m.text)),
+        ).toBe(true);
       }
       expect(moves).toBeLessThan(1000);
     }

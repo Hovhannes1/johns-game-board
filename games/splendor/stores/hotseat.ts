@@ -2,7 +2,13 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { basePack } from '@/games/splendor/data';
 import { actionsFromLog, applyAction, createGame, replayGame } from '@/games/splendor/engine';
-import type { ActionIntent, GameAction, GameState, PlayerSeat, RuleError } from '@/games/splendor/engine';
+import type {
+  ActionIntent,
+  GameAction,
+  GameState,
+  PlayerSeat,
+  RuleError,
+} from '@/games/splendor/engine';
 
 /**
  * Hot-seat game on this device (Milestone 2). The real engine runs in the

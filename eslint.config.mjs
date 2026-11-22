@@ -5,7 +5,13 @@ const config = [
   ...nextCoreWebVitals,
   ...nextTypescript,
   {
-    ignores: ['node_modules/**', '.next/**', 'coverage/**', 'next-env.d.ts', 'games/splendor/data/sources/raw/**'],
+    ignores: [
+      'node_modules/**',
+      '.next/**',
+      'coverage/**',
+      'next-env.d.ts',
+      'games/splendor/data/sources/raw/**',
+    ],
   },
   {
     rules: {
