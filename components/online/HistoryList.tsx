@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { api } from '@/lib/api-client';
 import type { HistoryEntry } from '@/lib/protocol';
-import { joinList, online } from '@/lib/strings';
+import { joinList, online } from '@/games/splendor/lib/strings';
 
 const t = online.history;
 

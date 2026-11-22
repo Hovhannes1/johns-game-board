@@ -1,18 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import { computePayment, explainIntentForViewer, sumCounts, TOKEN_COLORS } from '@/engine';
-import type { ActionIntent, CardDef, GameView, Level, RuleError, TokenColor } from '@/engine';
-import { CardBack, CardFace } from '@/components/art/CardArt';
-import { NobleTile } from '@/components/art/NobleArt';
-import { TokenChip } from '@/components/art/TokenChip';
-import { Button, Dialog } from '@/components/ui/Dialog';
-import { cardTitle, costText, requirementText, tokenList } from '@/lib/format';
-import { joinList, strings } from '@/lib/strings';
-import { usePreferences } from '@/stores/preferences';
-import type { ArtStyle } from '@/stores/preferences';
-import { GemIcon } from '@/components/art/GemIcon';
-import { cardTile, chipTile, spriteStyle } from '@/components/art/sprites';
+import { computePayment, explainIntentForViewer, sumCounts, TOKEN_COLORS } from '@/games/splendor/engine';
+import type { ActionIntent, CardDef, GameView, Level, RuleError, TokenColor } from '@/games/splendor/engine';
+import { CardBack, CardFace } from '@/games/splendor/components/art/CardArt';
+import { NobleTile } from '@/games/splendor/components/art/NobleArt';
+import { TokenChip } from '@/games/splendor/components/art/TokenChip';
+import { Button, Dialog } from '@/platform/ui/Dialog';
+import { cardTitle, costText, requirementText, tokenList } from '@/games/splendor/lib/format';
+import { joinList, strings } from '@/games/splendor/lib/strings';
+import { usePreferences } from '@/games/splendor/stores/preferences';
+import type { ArtStyle } from '@/games/splendor/stores/preferences';
+import { GemIcon } from '@/games/splendor/components/art/GemIcon';
+import { cardTile, chipTile, spriteStyle } from '@/games/splendor/components/art/sprites';
 
 type Submit = (intent: ActionIntent) => Promise<RuleError | null>;
 

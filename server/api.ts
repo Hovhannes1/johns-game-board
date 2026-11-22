@@ -16,7 +16,7 @@ import {
   roomAdminSchema,
   roomCode,
 } from '../lib/protocol';
-import { serverErrors } from '../lib/strings';
+import { serverErrors } from '../games/splendor/lib/strings';
 import type { AdminSecret } from './admin-secret';
 import type { ServerConfig } from './config';
 import type { Store } from './db';

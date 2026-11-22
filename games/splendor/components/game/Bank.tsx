@@ -1,12 +1,12 @@
 'use client';
 
-import { GEM_COLORS } from '@/engine';
-import type { ActionIntent, GameView, GemColor, RuleError } from '@/engine';
-import { TokenChip } from '@/components/art/TokenChip';
-import { Button } from '@/components/ui/Dialog';
-import { canAddGem } from '@/lib/selection';
-import type { GemSelection } from '@/lib/selection';
-import { strings } from '@/lib/strings';
+import { GEM_COLORS } from '@/games/splendor/engine';
+import type { ActionIntent, GameView, GemColor, RuleError } from '@/games/splendor/engine';
+import { TokenChip } from '@/games/splendor/components/art/TokenChip';
+import { Button } from '@/platform/ui/Dialog';
+import { canAddGem } from '@/games/splendor/lib/selection';
+import type { GemSelection } from '@/games/splendor/lib/selection';
+import { strings } from '@/games/splendor/lib/strings';
 
 interface BankProps {
   view: GameView;

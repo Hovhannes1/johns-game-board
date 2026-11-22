@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect, useMemo, useRef } from 'react';
-import type { GameView } from '@/engine';
-import { catalogFor } from '@/lib/catalog';
-import { formatLog } from '@/lib/format';
-import { strings } from '@/lib/strings';
+import type { GameView } from '@/games/splendor/engine';
+import { catalogFor } from '@/games/splendor/lib/catalog';
+import { formatLog } from '@/games/splendor/lib/format';
+import { strings } from '@/games/splendor/lib/strings';
 
 /** Scrolling, human-readable move history (FR-9). */
 export function GameLog({ view }: { view: GameView }) {

@@ -1,5 +1,5 @@
-import { basePack } from '@/data';
-import type { CardDef, CardPack, NobleDef } from '@/engine';
+import { basePack } from '@/games/splendor/data';
+import type { CardDef, CardPack, NobleDef } from '@/games/splendor/engine';
 
 /**
  * Static card and noble lookup for packs the client knows about. The full

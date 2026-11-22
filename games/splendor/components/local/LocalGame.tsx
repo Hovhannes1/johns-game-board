@@ -1,9 +1,9 @@
 'use client';
 
 import { useMemo, useSyncExternalStore } from 'react';
-import { getPublicView } from '@/engine';
-import { GameTable } from '@/components/game/GameTable';
-import { useHotseat } from '@/stores/hotseat';
+import { getPublicView } from '@/games/splendor/engine';
+import { GameTable } from '@/games/splendor/components/game/GameTable';
+import { useHotseat } from '@/games/splendor/stores/hotseat';
 import { SetupForm } from './SetupForm';
 
 const subscribeNothing = () => () => {};

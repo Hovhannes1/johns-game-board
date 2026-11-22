@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { OnlineRoom } from '@/components/online/OnlineRoom';
 import { roomCode } from '@/lib/protocol';
-import { strings } from '@/lib/strings';
+import { strings } from '@/games/splendor/lib/strings';
 
 export const metadata: Metadata = { title: strings.appName };
 

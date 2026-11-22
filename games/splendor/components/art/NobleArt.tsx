@@ -1,9 +1,9 @@
 'use client';
 
 import { useId } from 'react';
-import { GEM_COLORS } from '@/engine';
-import type { NobleDef } from '@/engine';
-import { useArtStyle } from '@/stores/preferences';
+import { GEM_COLORS } from '@/games/splendor/engine';
+import type { NobleDef } from '@/games/splendor/engine';
+import { useArtStyle } from '@/games/splendor/stores/preferences';
 import { CARD_SCALES } from './CardArt';
 import type { CardScale } from './CardArt';
 import { GemIcon } from './GemIcon';

@@ -1,4 +1,4 @@
-import type { ActionIntent, GemColor, RuleSet, TokenCounts } from '@/engine';
+import type { ActionIntent, GemColor, RuleSet, TokenCounts } from '@/games/splendor/engine';
 import { strings } from './strings';
 
 /**

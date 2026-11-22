@@ -3,14 +3,14 @@
 import { LayoutGroup, MotionConfig } from 'motion/react';
 import { useEffect, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
-import { explainIntentForViewer, legalIntentsForViewer } from '@/engine';
-import type { ActionIntent, CardDef, GameView, GemColor, Level, RuleError } from '@/engine';
-import { SEAT_COLORS } from '@/components/art/palette';
-import { Button } from '@/components/ui/Dialog';
-import { addGem, removeGem, selectionToIntent } from '@/lib/selection';
-import type { GemSelection } from '@/lib/selection';
-import { online, strings } from '@/lib/strings';
-import { useArtStyle, usePreferences, useReducedMotion } from '@/stores/preferences';
+import { explainIntentForViewer, legalIntentsForViewer } from '@/games/splendor/engine';
+import type { ActionIntent, CardDef, GameView, GemColor, Level, RuleError } from '@/games/splendor/engine';
+import { SEAT_COLORS } from '@/games/splendor/components/art/palette';
+import { Button } from '@/platform/ui/Dialog';
+import { addGem, removeGem, selectionToIntent } from '@/games/splendor/lib/selection';
+import type { GemSelection } from '@/games/splendor/lib/selection';
+import { online, strings } from '@/games/splendor/lib/strings';
+import { useArtStyle, usePreferences, useReducedMotion } from '@/games/splendor/stores/preferences';
 import { Bank, SelectionTray } from './Bank';
 import {
   CardActionDialog,

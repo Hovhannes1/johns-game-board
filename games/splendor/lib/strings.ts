@@ -2,7 +2,7 @@
  * All user-facing UI text in one place (section 4.3) so translation can be
  * added later. Rule-violation messages live in engine/errors.ts.
  */
-import type { GameEndReason, Level, TokenColor } from '@/engine';
+import type { GameEndReason, Level, TokenColor } from '@/games/splendor/engine';
 
 const plural = (n: number, one: string, many = `${one}s`) => (n === 1 ? one : many);
 

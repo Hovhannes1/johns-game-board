@@ -4,12 +4,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useId, useState } from 'react';
 import type { FormEvent } from 'react';
-import { ConfirmDialog } from '@/components/game/dialogs';
-import { Button } from '@/components/ui/Dialog';
+import { ConfirmDialog } from '@/games/splendor/components/game/dialogs';
+import { Button } from '@/platform/ui/Dialog';
 import { api } from '@/lib/api-client';
 import { DEFAULT_SETTINGS, LIMITS } from '@/lib/protocol';
 import type { RoomSettings, RoomSummary, SeatColorId, SessionInfo } from '@/lib/protocol';
-import { online, strings } from '@/lib/strings';
+import { online, strings } from '@/games/splendor/lib/strings';
 import { ColorPicker } from './ColorPicker';
 import { SettingsFields } from './SettingsFields';
 

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { HistoryList } from '@/components/online/HistoryList';
-import { online, strings } from '@/lib/strings';
+import { online, strings } from '@/games/splendor/lib/strings';
 
 export const metadata: Metadata = { title: `${online.history.title} · ${strings.appName}` };
 

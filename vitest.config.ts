@@ -13,8 +13,8 @@ export default defineConfig({
     exclude: ['node_modules/**', '.next/**'],
     coverage: {
       provider: 'v8',
-      include: ['engine/**/*.ts', 'data/**/*.ts'],
-      exclude: ['**/*.test.ts', 'engine/testing/**'],
+      include: ['games/splendor/engine/**/*.ts', 'games/splendor/data/**/*.ts'],
+      exclude: ['**/*.test.ts', 'games/splendor/engine/testing/**'],
       thresholds: {
         lines: 95,
         functions: 95,

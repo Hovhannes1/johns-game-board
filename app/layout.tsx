@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { headers } from 'next/headers';
 import type { ReactNode } from 'react';
-import { strings } from '@/lib/strings';
+import { strings } from '@/games/splendor/lib/strings';
 import './globals.css';
 
 export const metadata: Metadata = {

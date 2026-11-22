@@ -1,11 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { SEAT_COLOR_HEX } from '@/components/art/palette';
-import { ConfirmDialog } from '@/components/game/dialogs';
-import { Button } from '@/components/ui/Dialog';
+import { SEAT_COLOR_HEX } from '@/games/splendor/components/art/palette';
+import { ConfirmDialog } from '@/games/splendor/components/game/dialogs';
+import { Button } from '@/platform/ui/Dialog';
 import type { ChatMessage, MemberView, RoomSettings, RoomView } from '@/lib/protocol';
-import { online, strings } from '@/lib/strings';
+import { online, strings } from '@/games/splendor/lib/strings';
 import { useOnline } from '@/stores/online';
 import { ChatPanel } from './ChatPanel';
 import { SettingsFields } from './SettingsFields';

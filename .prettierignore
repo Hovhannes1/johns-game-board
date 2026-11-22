@@ -2,5 +2,5 @@ node_modules
 .next
 coverage
 package-lock.json
-data/sources/raw
+games/splendor/data/sources/raw
 *.md

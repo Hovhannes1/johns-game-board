@@ -1,5 +1,5 @@
-import { GEM_COLORS, TOKEN_COLORS } from '@/engine';
-import type { CardDef, GameEvent, GemCounts, LogEntry, TokenColor } from '@/engine';
+import { GEM_COLORS, TOKEN_COLORS } from '@/games/splendor/engine';
+import type { CardDef, GameEvent, GemCounts, LogEntry, TokenColor } from '@/games/splendor/engine';
 import type { Catalog } from './catalog';
 import { joinList, strings } from './strings';
 

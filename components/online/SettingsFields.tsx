@@ -3,7 +3,7 @@
 import { useId } from 'react';
 import { DISCONNECT_SKIPS, TURN_TIMERS } from '@/lib/protocol';
 import type { RoomSettings } from '@/lib/protocol';
-import { online } from '@/lib/strings';
+import { online } from '@/games/splendor/lib/strings';
 
 const t = online.settings;
 

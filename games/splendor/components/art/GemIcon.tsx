@@ -1,5 +1,5 @@
 import { useId } from 'react';
-import type { TokenColor } from '@/engine';
+import type { TokenColor } from '@/games/splendor/engine';
 import { GEM_PALETTE, svgId } from './palette';
 
 /**

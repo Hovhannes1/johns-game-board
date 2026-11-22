@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
-import { strings } from '@/lib/strings';
+import { strings } from '@/games/splendor/lib/strings';
 
 type Status = 'connecting' | 'connected' | 'disconnected';
 

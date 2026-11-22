@@ -1,6 +1,6 @@
 'use client';
 
-import { SEAT_COLOR_HEX } from '@/components/art/palette';
+import { SEAT_COLOR_HEX } from '@/games/splendor/components/art/palette';
 import { SEAT_COLOR_IDS } from '@/lib/protocol';
 import type { SeatColorId } from '@/lib/protocol';
 

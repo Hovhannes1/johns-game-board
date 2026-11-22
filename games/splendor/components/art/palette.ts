@@ -1,4 +1,4 @@
-import type { Level, TokenColor } from '@/engine';
+import type { Level, TokenColor } from '@/games/splendor/engine';
 
 /** Jewel-tone palette per gem: highlight, body, shadow, outline, and card tint. */
 export interface GemPalette {

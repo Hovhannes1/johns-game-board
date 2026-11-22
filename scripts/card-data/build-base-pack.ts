@@ -7,7 +7,7 @@
  */
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import { cardKey, costKey, diffKeys, nobleKey } from '../../data/canonical';
+import { cardKey, costKey, diffKeys, nobleKey } from '../../games/splendor/data/canonical';
 import type { NormalizedSource, SourceCard, SourceNoble } from './import-sources';
 
 const GEMS = ['diamond', 'sapphire', 'emerald', 'ruby', 'onyx'] as const;
@@ -68,7 +68,7 @@ function assertAgreement<T>(
 
 async function main(): Promise<void> {
   const root = process.cwd();
-  const sources = await loadSources(path.join(root, 'data', 'sources'));
+  const sources = await loadSources(path.join(root, 'games', 'splendor', 'data', 'sources'));
   if (sources.length < 2) throw new Error('Need at least two independent sources (FR-23).');
 
   assertAgreement(
@@ -135,7 +135,7 @@ async function main(): Promise<void> {
     nobles,
   };
 
-  const out = path.join(root, 'data', 'packs', 'base.json');
+  const out = path.join(root, 'games', 'splendor', 'data', 'packs', 'base.json');
   await mkdir(path.dirname(out), { recursive: true });
   await writeFile(out, `${JSON.stringify(pack, null, 2)}\n`, 'utf8');
   console.log(`Wrote ${cards.length} cards and ${nobles.length} nobles to ${out}`);

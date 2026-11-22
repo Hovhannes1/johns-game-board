@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import type { Level, TokenColor } from '@/engine';
+import type { Level, TokenColor } from '@/games/splendor/engine';
 import { hashString } from './palette';
 
 /**

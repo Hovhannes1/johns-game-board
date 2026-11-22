@@ -1,7 +1,7 @@
 import { io } from 'socket.io-client';
 import type { Socket } from 'socket.io-client';
 import { create } from 'zustand';
-import type { ActionIntent, GameView, RuleError } from '@/engine';
+import type { ActionIntent, GameView, RuleError } from '@/games/splendor/engine';
 import type { Ack, ChatMessage, ClientEvent, ClientPayload, RoomView } from '@/lib/protocol';
 
 /**

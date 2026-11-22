@@ -3,9 +3,9 @@
 import { useRouter } from 'next/navigation';
 import { useId, useState } from 'react';
 import type { FormEvent } from 'react';
-import { Button } from '@/components/ui/Dialog';
+import { Button } from '@/platform/ui/Dialog';
 import { roomCode } from '@/lib/protocol';
-import { online } from '@/lib/strings';
+import { online } from '@/games/splendor/lib/strings';
 
 /** Home-page entry: type a room code, continue to the join form. */
 export function JoinCodeForm() {

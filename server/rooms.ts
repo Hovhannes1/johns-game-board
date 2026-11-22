@@ -6,9 +6,9 @@
  * accepted action is validated by the engine, appended to the game record and
  * persisted before anyone is notified.
  */
-import { basePack } from '../data';
-import { applyAction, autoIntent, createGame, getPublicView, replayGame } from '../engine';
-import type { ActionIntent, GameAction, GameState, GameView, PlayerSeat } from '../engine';
+import { basePack } from '../games/splendor/data';
+import { applyAction, autoIntent, createGame, getPublicView, replayGame } from '../games/splendor/engine';
+import type { ActionIntent, GameAction, GameState, GameView, PlayerSeat } from '../games/splendor/engine';
 import type {
   ChatMessage,
   HistoryEntry,
@@ -20,7 +20,7 @@ import type {
   SeatColorId,
 } from '../lib/protocol';
 import { SEAT_COLOR_IDS } from '../lib/protocol';
-import { serverErrors, systemChat } from '../lib/strings';
+import { serverErrors, systemChat } from '../games/splendor/lib/strings';
 import type { Store } from './db';
 import type { Logger } from './logger';
 import { cryptoShuffle, newId, newRoomCode, newSeed } from './security/tokens';

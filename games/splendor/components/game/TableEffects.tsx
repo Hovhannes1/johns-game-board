@@ -2,12 +2,12 @@
 
 import { animate } from 'motion/react';
 import { useEffect, useRef } from 'react';
-import { TOKEN_COLORS } from '@/engine';
-import type { GameEvent, LogEntry, TokenColor } from '@/engine';
-import { GEM_PALETTE } from '@/components/art/palette';
-import { chipTile, spriteStyle } from '@/components/art/sprites';
-import { playSound, primeAudio } from '@/lib/sound';
-import type { ArtStyle } from '@/stores/preferences';
+import { TOKEN_COLORS } from '@/games/splendor/engine';
+import type { GameEvent, LogEntry, TokenColor } from '@/games/splendor/engine';
+import { GEM_PALETTE } from '@/games/splendor/components/art/palette';
+import { chipTile, spriteStyle } from '@/games/splendor/components/art/sprites';
+import { playSound, primeAudio } from '@/games/splendor/lib/sound';
+import type { ArtStyle } from '@/games/splendor/stores/preferences';
 
 /**
  * Motion and sound for game events (section 4.2). Runs imperatively on DOM

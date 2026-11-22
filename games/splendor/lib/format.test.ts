@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { toGemCounts } from '@/engine';
-import type { GameEvent } from '@/engine';
+import { toGemCounts } from '@/games/splendor/engine';
+import type { GameEvent } from '@/games/splendor/engine';
 import { catalogFor } from './catalog';
 import { cardTitle, describeCard, formatEvent, formatLog, tokenList } from './format';
 

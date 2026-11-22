@@ -2,10 +2,10 @@
 
 import { useId } from 'react';
 import type { CSSProperties } from 'react';
-import { GEM_COLORS } from '@/engine';
-import type { CardDef, Level } from '@/engine';
-import { strings } from '@/lib/strings';
-import { useArtStyle } from '@/stores/preferences';
+import { GEM_COLORS } from '@/games/splendor/engine';
+import type { CardDef, Level } from '@/games/splendor/engine';
+import { strings } from '@/games/splendor/lib/strings';
+import { useArtStyle } from '@/games/splendor/stores/preferences';
 import { gemOutline, GemIcon } from './GemIcon';
 import { GEM_PALETTE, hashString, LEVEL_BACKS, svgId } from './palette';
 import { cardTile, spriteStyle } from './sprites';

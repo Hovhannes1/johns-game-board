@@ -8,9 +8,9 @@
  * stopAt: returnTokens | chooseNoble | finished (stop as soon as it happens).
  */
 import { writeFileSync } from 'node:fs';
-import { basePack } from '../data';
-import { actionsFromLog, applyAction, createGame, createRng } from '../engine';
-import { randomAction } from '../engine/testing/random-play';
+import { basePack } from '../games/splendor/data';
+import { actionsFromLog, applyAction, createGame, createRng } from '../games/splendor/engine';
+import { randomAction } from '../games/splendor/engine/testing/random-play';
 
 const [playersArg, movesArg, seedArg, out, stopAt] = process.argv.slice(2);
 const players = Number(playersArg ?? 3);

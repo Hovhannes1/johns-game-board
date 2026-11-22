@@ -1,8 +1,8 @@
 'use client';
 
 import type { CSSProperties } from 'react';
-import type { TokenColor } from '@/engine';
-import { useArtStyle } from '@/stores/preferences';
+import type { TokenColor } from '@/games/splendor/engine';
+import { useArtStyle } from '@/games/splendor/stores/preferences';
 import { GemIcon } from './GemIcon';
 import { GEM_PALETTE } from './palette';
 import { chipTile, spriteStyle } from './sprites';

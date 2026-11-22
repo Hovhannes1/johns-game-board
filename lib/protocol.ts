@@ -3,9 +3,9 @@
  * is validated with these strict schemas; unknown fields are rejected (SEC-8).
  */
 import { z } from 'zod';
-import { GEM_COLORS, TOKEN_COLORS } from '@/engine/gems';
-import type { ActionIntent } from '@/engine/types';
-import type { GameView } from '@/engine/view';
+import { GEM_COLORS, TOKEN_COLORS } from '@/games/splendor/engine/gems';
+import type { ActionIntent } from '@/games/splendor/engine/types';
+import type { GameView } from '@/games/splendor/engine/view';
 
 // ---------------------------------------------------------------------------
 // Primitives

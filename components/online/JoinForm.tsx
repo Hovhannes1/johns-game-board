@@ -4,11 +4,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useId, useState } from 'react';
 import type { FormEvent } from 'react';
-import { Button } from '@/components/ui/Dialog';
+import { Button } from '@/platform/ui/Dialog';
 import { api } from '@/lib/api-client';
 import { LIMITS } from '@/lib/protocol';
 import type { SeatColorId, SessionInfo } from '@/lib/protocol';
-import { online } from '@/lib/strings';
+import { online } from '@/games/splendor/lib/strings';
 import { ColorPicker } from './ColorPicker';
 
 const t = online.join;

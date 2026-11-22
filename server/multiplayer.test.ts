@@ -4,8 +4,8 @@
  * with a server restart in the middle (sections 3.6 and 8).
  */
 import { afterEach, describe, expect, it } from 'vitest';
-import { createRng, LEVELS, legalIntentsForViewer } from '../engine';
-import type { GameView } from '../engine';
+import { createRng, LEVELS, legalIntentsForViewer } from '../games/splendor/engine';
+import type { GameView } from '../games/splendor/engine';
 import { Client, TestServer, waitFor } from './testing/harness';
 
 let servers: TestServer[] = [];

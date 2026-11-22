@@ -156,7 +156,7 @@ async function reedstonefood(): Promise<NormalizedSource> {
 }
 
 async function main(): Promise<void> {
-  const outDir = path.join(process.cwd(), 'data', 'sources');
+  const outDir = path.join(process.cwd(), 'games', 'splendor', 'data', 'sources');
   await mkdir(outDir, { recursive: true });
   for (const load of [monkTime, comp90054, reedstonefood]) {
     const source = await load();

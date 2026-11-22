@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { GemIcon } from '@/components/art/GemIcon';
+import { GemIcon } from '@/games/splendor/components/art/GemIcon';
 import { ConnectionStatus } from '@/components/ConnectionStatus';
 import { JoinCodeForm } from '@/components/online/JoinCodeForm';
-import { GEM_COLORS } from '@/engine';
-import { online, strings } from '@/lib/strings';
+import { GEM_COLORS } from '@/games/splendor/engine';
+import { online, strings } from '@/games/splendor/lib/strings';
 
 const linkCard = 'block rounded-xl px-5 py-3 text-left transition-colors';
 

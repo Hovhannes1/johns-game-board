@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo } from 'react';
-import { GameTable } from '@/components/game/GameTable';
-import { online } from '@/lib/strings';
+import { GameTable } from '@/games/splendor/components/game/GameTable';
+import { online } from '@/games/splendor/lib/strings';
 import { useOnline } from '@/stores/online';
 import { ChatPanel } from './ChatPanel';
 import { Lobby } from './Lobby';

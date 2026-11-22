@@ -3,9 +3,9 @@
 import Link from 'next/link';
 import { useId, useState } from 'react';
 import type { FormEvent } from 'react';
-import { SEAT_COLORS } from '@/components/art/palette';
-import { Button } from '@/components/ui/Dialog';
-import { strings } from '@/lib/strings';
+import { SEAT_COLORS } from '@/games/splendor/components/art/palette';
+import { Button } from '@/platform/ui/Dialog';
+import { strings } from '@/games/splendor/lib/strings';
 
 const MAX_NAME = 20;
 

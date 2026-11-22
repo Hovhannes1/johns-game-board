@@ -1,12 +1,12 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { LEVELS } from '@/engine';
-import type { CardDef, GameView, Level, NobleDef } from '@/engine';
-import { CardBack, CardFace, EmptySlot } from '@/components/art/CardArt';
-import { NobleTile } from '@/components/art/NobleArt';
-import { describeCard, requirementText } from '@/lib/format';
-import { strings } from '@/lib/strings';
+import { LEVELS } from '@/games/splendor/engine';
+import type { CardDef, GameView, Level, NobleDef } from '@/games/splendor/engine';
+import { CardBack, CardFace, EmptySlot } from '@/games/splendor/components/art/CardArt';
+import { NobleTile } from '@/games/splendor/components/art/NobleArt';
+import { describeCard, requirementText } from '@/games/splendor/lib/format';
+import { strings } from '@/games/splendor/lib/strings';
 
 interface MarketProps {
   view: GameView;

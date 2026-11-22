@@ -8,7 +8,7 @@ import { Server } from 'socket.io';
 import type { Socket } from 'socket.io';
 import type { Ack, ClientEvent, ServerEvents } from '../lib/protocol';
 import { clientMessages } from '../lib/protocol';
-import { serverErrors } from '../lib/strings';
+import { serverErrors } from '../games/splendor/lib/strings';
 import type { ServerConfig } from './config';
 import { guardRequest, isOriginAllowed, readSessionCookie } from './http-guard';
 import type { Logger } from './logger';

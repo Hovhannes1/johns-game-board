@@ -5,7 +5,7 @@ const config = [
   ...nextCoreWebVitals,
   ...nextTypescript,
   {
-    ignores: ['node_modules/**', '.next/**', 'coverage/**', 'next-env.d.ts', 'data/sources/raw/**'],
+    ignores: ['node_modules/**', '.next/**', 'coverage/**', 'next-env.d.ts', 'games/splendor/data/sources/raw/**'],
   },
   {
     rules: {
@@ -16,8 +16,8 @@ const config = [
   },
   {
     // The rules engine must stay pure: no framework, network, or Node I/O (FR-15).
-    files: ['engine/**/*.ts'],
-    ignores: ['engine/**/*.test.ts', 'engine/testing/**'],
+    files: ['games/splendor/engine/**/*.ts'],
+    ignores: ['games/splendor/engine/**/*.test.ts', 'games/splendor/engine/testing/**'],
     rules: {
       'no-restricted-imports': [
         'error',

@@ -2,16 +2,16 @@
 
 import { motion } from 'motion/react';
 import { useState } from 'react';
-import { GEM_COLORS } from '@/engine';
-import type { CardDef, GemColor, PlayerView, RuleSet } from '@/engine';
-import { CardBack, CardFace } from '@/components/art/CardArt';
-import type { CardScale } from '@/components/art/CardArt';
-import { CARD_SCALES } from '@/components/art/CardArt';
-import { GemIcon } from '@/components/art/GemIcon';
-import { NobleTile } from '@/components/art/NobleArt';
-import { TokenChip } from '@/components/art/TokenChip';
-import { describeCard, requirementText, tokenList } from '@/lib/format';
-import { online, strings } from '@/lib/strings';
+import { GEM_COLORS } from '@/games/splendor/engine';
+import type { CardDef, GemColor, PlayerView, RuleSet } from '@/games/splendor/engine';
+import { CardBack, CardFace } from '@/games/splendor/components/art/CardArt';
+import type { CardScale } from '@/games/splendor/components/art/CardArt';
+import { CARD_SCALES } from '@/games/splendor/components/art/CardArt';
+import { GemIcon } from '@/games/splendor/components/art/GemIcon';
+import { NobleTile } from '@/games/splendor/components/art/NobleArt';
+import { TokenChip } from '@/games/splendor/components/art/TokenChip';
+import { describeCard, requirementText, tokenList } from '@/games/splendor/lib/format';
+import { online, strings } from '@/games/splendor/lib/strings';
 
 interface PlayerAreaProps {
   player: PlayerView;

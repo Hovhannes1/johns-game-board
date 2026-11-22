@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { BASE_RULES, toTokenCounts } from '@/engine';
+import { BASE_RULES, toTokenCounts } from '@/games/splendor/engine';
 import { addGem, canAddGem, removeGem, selectionToIntent } from './selection';
 
 const full = toTokenCounts({ diamond: 4, sapphire: 4, emerald: 4, ruby: 4, onyx: 4, gold: 5 });

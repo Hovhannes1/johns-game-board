@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { LocalGame } from '@/components/local/LocalGame';
-import { strings } from '@/lib/strings';
+import { LocalGame } from '@/games/splendor/components/local/LocalGame';
+import { strings } from '@/games/splendor/lib/strings';
 
 export const metadata: Metadata = { title: `${strings.home.hotseat} · ${strings.appName}` };
 

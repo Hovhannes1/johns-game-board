@@ -2,11 +2,11 @@
 
 import { useEffect, useRef, useState } from 'react';
 import type { FormEvent } from 'react';
-import { SEAT_COLOR_HEX } from '@/components/art/palette';
-import { Button } from '@/components/ui/Dialog';
+import { SEAT_COLOR_HEX } from '@/games/splendor/components/art/palette';
+import { Button } from '@/platform/ui/Dialog';
 import { EMOTES, LIMITS } from '@/lib/protocol';
 import type { ChatMessage } from '@/lib/protocol';
-import { online } from '@/lib/strings';
+import { online } from '@/games/splendor/lib/strings';
 import { useOnline } from '@/stores/online';
 
 /**

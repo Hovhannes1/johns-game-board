@@ -8,7 +8,7 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { io } from 'socket.io-client';
 import type { Socket } from 'socket.io-client';
-import type { GameView } from '../../engine';
+import type { GameView } from '../../games/splendor/engine';
 import type { Ack, ChatMessage, RoomView } from '../../lib/protocol';
 import { DEFAULT_SETTINGS } from '../../lib/protocol';
 import type { RoomSettings } from '../../lib/protocol';
