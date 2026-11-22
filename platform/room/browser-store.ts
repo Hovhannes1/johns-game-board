@@ -18,12 +18,17 @@ const memoryKeys = new Map<string, string>();
 export function getOrCreateClientKey(roomCode: string): string {
   const key = `${CLIENT_KEY_PREFIX}${roomCode.toUpperCase()}`;
   try {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      const existing = window.localStorage.getItem(key);
-      if (existing) return existing;
-      const created = randomKey();
-      window.localStorage.setItem(key, created);
-      return created;
+    if (typeof window !== 'undefined') {
+      const useSession =
+        new URLSearchParams(window.location.search).get('transport') === 'broadcast';
+      const storage = useSession ? window.sessionStorage : window.localStorage;
+      if (storage) {
+        const existing = storage.getItem(key);
+        if (existing) return existing;
+        const created = randomKey();
+        storage.setItem(key, created);
+        return created;
+      }
     }
   } catch {
     // Fall back to memory if storage is blocked.

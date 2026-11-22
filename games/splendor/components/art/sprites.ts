@@ -11,11 +11,13 @@ import { hashString } from './palette';
  *   deck.jpg     3 tiles: card backs for levels I, II, III
  *   nobles.jpg  10 tiles: one portrait per noble (N01..N10)
  */
+const base = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+
 export const SHEETS = {
-  cards: { url: '/art/cards.jpg', count: 15 },
-  chips: { url: '/art/chips.jpg', count: 6 },
-  deck: { url: '/art/deck.jpg', count: 3 },
-  nobles: { url: '/art/nobles.jpg', count: 10 },
+  cards: { url: `${base}/art/cards.jpg`, count: 15 },
+  chips: { url: `${base}/art/chips.jpg`, count: 6 },
+  deck: { url: `${base}/art/deck.jpg`, count: 3 },
+  nobles: { url: `${base}/art/nobles.jpg`, count: 10 },
 } as const;
 export type Sheet = keyof typeof SHEETS;
 

@@ -30,7 +30,7 @@ jobs:
         run: npm test
         env:
           FUZZ_GAMES: '5000'
-      - name: Dependency audit (SEC-17)
+      - name: Dependency audit
         run: npm audit --audit-level=moderate
       - run: npm run build
       - name: End-to-end tests (Playwright)

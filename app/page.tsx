@@ -1,47 +1,62 @@
 import Link from 'next/link';
 import { GemIcon } from '@/games/splendor/components/art/GemIcon';
-import { ConnectionStatus } from '@/components/ConnectionStatus';
-import { JoinCodeForm } from '@/components/online/JoinCodeForm';
 import { GEM_COLORS } from '@/games/splendor/engine';
-import { online, strings } from '@/games/splendor/lib/strings';
+import { listGames } from '@/platform/games/registry';
+import { JoinCodeForm } from '@/components/online/JoinCodeForm';
+import { ResumeCard } from '@/components/platform/ResumeCard';
 
-const linkCard = 'block rounded-xl px-5 py-3 text-left transition-colors';
+export default function GalleryPage() {
+  const games = listGames();
 
-export default function HomePage() {
   return (
-    <main className="mx-auto flex min-h-dvh max-w-2xl flex-col items-center justify-center gap-8 px-6 py-10 text-center">
-      <div aria-hidden="true" className="flex gap-3">
-        {GEM_COLORS.map((c) => (
-          <GemIcon key={c} color={c} size="2.25rem" />
-        ))}
-      </div>
-      <div>
+    <main className="mx-auto flex min-h-dvh max-w-4xl flex-col items-center justify-center gap-10 px-6 py-12 text-center">
+      <header className="flex flex-col items-center gap-3">
+        <p className="text-xs tracking-[0.25em] text-brass/80 uppercase">Peer-to-Peer Tabletop</p>
         <h1 className="font-display text-5xl font-semibold tracking-wide text-brass sm:text-6xl">
-          {strings.appName}
+          John&apos;s Game Board
         </h1>
-        <p className="mt-3 font-display text-xl opacity-90">{strings.tagline}</p>
+        <p className="max-w-xl font-display text-lg text-parchment/85">
+          Pick a board game to host or play locally, or paste a room code to join a friend&apos;s
+          table directly in your browser.
+        </p>
+      </header>
+
+      <section aria-label="Available games" className="grid w-full gap-4 sm:grid-cols-2">
+        {games.map((game) => (
+          <Link
+            key={game.id}
+            href={`/${game.id}/`}
+            className="group flex flex-col justify-between gap-4 rounded-2xl border border-brass/35 bg-felt-900/80 p-6 text-left shadow-xl transition-colors hover:border-brass hover:bg-felt-900"
+          >
+            <div className="flex flex-col gap-3">
+              {game.id === 'splendor' && (
+                <div aria-hidden="true" className="flex gap-2">
+                  {GEM_COLORS.map((c) => (
+                    <GemIcon key={c} color={c} size="1.5rem" />
+                  ))}
+                </div>
+              )}
+              <div>
+                <h2 className="font-display text-2xl font-semibold text-brass group-hover:underline">
+                  {game.title}
+                </h2>
+                <p className="mt-1 text-sm text-parchment/80">{game.tagline}</p>
+              </div>
+            </div>
+            <div className="flex items-center justify-between text-xs text-parchment/65">
+              <span>
+                {game.minPlayers}–{game.maxPlayers} players
+              </span>
+              <span className="font-semibold text-brass">Play →</span>
+            </div>
+          </Link>
+        ))}
+      </section>
+
+      <div className="flex w-full max-w-md flex-col gap-4">
+        <ResumeCard />
+        <JoinCodeForm gameId="splendor" />
       </div>
-      <nav aria-label="Play" className="flex w-full max-w-md flex-col gap-3">
-        <JoinCodeForm />
-        <Link href="/host" className={`${linkCard} bg-brass text-felt-950 hover:bg-[#d9b45c]`}>
-          <span className="block font-semibold">{online.home.host}</span>
-          <span className="block text-sm opacity-80">{online.home.hostHint}</span>
-        </Link>
-        <Link
-          href="/local"
-          className={`${linkCard} border border-parchment/20 hover:border-brass/60`}
-        >
-          <span className="block font-semibold">{strings.home.hotseat}</span>
-          <span className="block text-sm opacity-80">{strings.home.hotseatHint}</span>
-        </Link>
-        <Link
-          href="/history"
-          className="text-sm text-parchment/70 underline-offset-4 hover:underline"
-        >
-          {online.home.history}
-        </Link>
-      </nav>
-      <ConnectionStatus />
     </main>
   );
 }

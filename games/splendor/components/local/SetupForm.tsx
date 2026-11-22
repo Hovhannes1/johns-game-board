@@ -121,7 +121,10 @@ export function SetupForm({ onStart }: SetupFormProps) {
 
       <div className="flex items-center gap-3">
         <Button type="submit">{strings.setup.start}</Button>
-        <Link href="/" className="text-sm text-parchment/70 underline-offset-4 hover:underline">
+        <Link
+          href="/splendor/"
+          className="text-sm text-parchment/70 underline-offset-4 hover:underline"
+        >
           {strings.setup.back}
         </Link>
       </div>

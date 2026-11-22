@@ -7,8 +7,14 @@ import { Button } from '@/platform/ui/Dialog';
 import { roomCode } from '@/lib/protocol';
 import { online } from '@/games/splendor/lib/strings';
 
-/** Home-page entry: type a room code, continue to the join form. */
-export function JoinCodeForm() {
+function extractCode(raw: string): string {
+  const hashIdx = raw.indexOf('#');
+  const candidate = hashIdx >= 0 ? raw.slice(hashIdx + 1) : raw;
+  return candidate.replace(/[\s-]/g, '');
+}
+
+/** Room-code or invite-link entry: navigates to `/<gameId>/play/#CODE`. */
+export function JoinCodeForm({ gameId = 'splendor' }: { gameId?: string }) {
   const router = useRouter();
   const id = useId();
   const [code, setCode] = useState('');
@@ -16,9 +22,9 @@ export function JoinCodeForm() {
 
   const submit = (event: FormEvent) => {
     event.preventDefault();
-    const parsed = roomCode.safeParse(code.replace(/[\s-]/g, ''));
+    const parsed = roomCode.safeParse(extractCode(code));
     if (!parsed.success) return setError(online.home.badCode);
-    router.push(`/join/${parsed.data}`);
+    router.push(`/${gameId}/play/#${parsed.data}`);
   };
 
   return (
@@ -34,10 +40,10 @@ export function JoinCodeForm() {
         <input
           id={id}
           value={code}
-          onChange={(e) => setCode(e.target.value.toUpperCase())}
+          onChange={(e) => setCode(e.target.value)}
           placeholder={online.home.codeLabel}
           autoComplete="off"
-          maxLength={14}
+          maxLength={120}
           aria-describedby={error ? `${id}-error` : undefined}
           className="min-w-0 flex-1 rounded-lg border border-parchment/25 bg-felt-950 px-3 py-2 font-mono tracking-widest uppercase"
         />

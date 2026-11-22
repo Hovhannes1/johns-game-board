@@ -4,6 +4,6 @@ import { strings } from '@/games/splendor/lib/strings';
 
 export const metadata: Metadata = { title: `${strings.home.hotseat} · ${strings.appName}` };
 
-export default function LocalPage() {
+export default function SplendorLocalPage() {
   return <LocalGame />;
 }

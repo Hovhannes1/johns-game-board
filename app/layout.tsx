@@ -1,11 +1,10 @@
 import type { Metadata, Viewport } from 'next';
-import { headers } from 'next/headers';
 import type { ReactNode } from 'react';
 import { strings } from '@/games/splendor/lib/strings';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: strings.appName,
+  title: "John's Game Board",
   description: strings.tagline,
   robots: { index: false, follow: false },
 };
@@ -16,12 +15,25 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
-  // Reading the request makes every page render per request, which the CSP
-  // nonce needs (proxy.ts); Next.js applies the nonce to its own scripts.
-  const nonce = (await headers()).get('x-nonce') ?? undefined;
+const STATIC_CSP = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline'",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob:",
+  "font-src 'self'",
+  "connect-src 'self' wss: https:",
+  "media-src 'self'",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+].join('; ');
+
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" data-csp={nonce ? 'nonce' : undefined}>
+    <html lang="en">
+      <head>
+        <meta httpEquiv="Content-Security-Policy" content={STATIC_CSP} />
+      </head>
       <body>{children}</body>
     </html>
   );

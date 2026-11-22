@@ -4,6 +4,6 @@ import { online, strings } from '@/games/splendor/lib/strings';
 
 export const metadata: Metadata = { title: `${online.history.title} · ${strings.appName}` };
 
-export default function HistoryPage() {
-  return <HistoryList />;
+export default function SplendorHistoryPage() {
+  return <HistoryList gameId="splendor" />;
 }

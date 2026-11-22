@@ -90,9 +90,12 @@ export function Lobby({
     return ack.ok;
   };
 
+  const icePath = useOnline((s) => s.icePath);
+
   const copy = async () => {
     try {
-      await navigator.clipboard.writeText(`${window.location.origin}/join/${room.code}`);
+      const base = window.location.href.split('#')[0] ?? window.location.href;
+      await navigator.clipboard.writeText(`${base}#${room.code}`);
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     } catch {
@@ -104,7 +107,11 @@ export function Lobby({
     <main className="mx-auto flex max-w-5xl flex-col gap-6 px-4 py-8">
       <header className="flex flex-wrap items-end gap-4">
         <div>
-          <p className="text-xs tracking-[0.2em] text-parchment/60 uppercase">{strings.appName}</p>
+          <p className="text-xs tracking-[0.2em] text-parchment/60 uppercase">
+            {strings.appName}
+            {isHost ? ' · Hosting in this tab' : ''}
+            {!isHost && icePath !== 'unknown' ? ` · ${icePath}` : ''}
+          </p>
           <h1 className="font-display text-4xl font-semibold text-brass">{room.name}</h1>
         </div>
         <div className="ml-auto flex flex-wrap items-center gap-3 text-sm">

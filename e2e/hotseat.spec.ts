@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import type { Page } from '@playwright/test';
 
 async function startGame(page: Page, names: string[]) {
-  await page.goto('/local');
+  await page.goto('/splendor/local/');
   await page.getByRole('radio', { name: String(names.length) }).check({ force: true });
   for (const [i, name] of names.entries()) {
     await page.getByRole('textbox', { name: `Player ${i + 1} name` }).fill(name);
@@ -18,7 +18,7 @@ const takeButton = (page: Page, gem: string) =>
 const log = (page: Page) => page.getByRole('region', { name: 'Game log' });
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('/local');
+  await page.goto('/splendor/local/');
   await page.evaluate(() => localStorage.clear());
 });
 

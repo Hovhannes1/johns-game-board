@@ -83,7 +83,7 @@ test('a complete hot-seat game reaches the end screen', async ({ page }, info) =
   test.skip(info.project.name !== 'desktop', 'One full game is enough; desktop only.');
   test.setTimeout(240_000);
 
-  await page.goto('/local');
+  await page.goto('/splendor/local/');
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   await page.getByRole('textbox', { name: 'Player 1 name' }).fill('Anna');

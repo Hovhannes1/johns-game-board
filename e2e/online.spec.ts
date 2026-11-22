@@ -1,18 +1,12 @@
 import { expect, test } from '@playwright/test';
-import type { Browser, Page } from '@playwright/test';
+import type { BrowserContext, Page } from '@playwright/test';
 
 /**
- * Two real browsers play online: the host creates a room, a friend joins with
- * the password, both see the same moves live, and the friend's hidden blind
- * reserve stays hidden from the host.
+ * Two real browser tabs play online using the same-origin BroadcastChannel
+ * transport (`?transport=broadcast`): host creates a room in-browser, friend
+ * joins with the password, both see the same moves live, and the friend's
+ * hidden blind reserve stays hidden from the host.
  */
-
-const ADMIN_SECRET = process.env.E2E_ADMIN_SECRET ?? 'e2e-admin-secret-1234';
-
-async function newPage(browser: Browser): Promise<Page> {
-  const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
-  return context.newPage();
-}
 
 const takeButton = (page: Page, gem: string) =>
   page.getByRole('button', { name: new RegExp(`^Take ${gem} \\(`) });
@@ -21,35 +15,37 @@ async function waitForVersion(page: Page, version: number) {
   await expect(page.locator('[data-version]')).toHaveAttribute('data-version', String(version));
 }
 
-test('host and friend play an online game in real time', async ({ browser }, info) => {
+test('host and friend play an online P2P game in real time', async ({ browser }, info) => {
   test.skip(info.project.name !== 'desktop', 'Runs once.');
   test.setTimeout(120_000);
-  const host = await newPage(browser);
-  const friend = await newPage(browser);
+  const context: BrowserContext = await browser.newContext({
+    viewport: { width: 1440, height: 900 },
+  });
+  const host = await context.newPage();
+  const friend = await context.newPage();
 
-  // Host logs in and creates a room.
-  await host.goto('/host');
-  await host.getByLabel('Host secret').fill(ADMIN_SECRET);
-  await host.getByRole('button', { name: 'Log in' }).click();
+  // Host creates a room directly in the browser.
+  await host.goto('/splendor/host/?transport=broadcast');
   await host.getByLabel('Room name').fill('E2E night');
-  await host.getByLabel('Room password (6+ characters)').fill('swordfish');
+  await host.getByLabel(/Room password/).fill('swordfish');
   await host.getByLabel('Your name').fill('Anna');
   await host.getByLabel('Seat order').selectOption('joined');
   await host.getByLabel('First player').selectOption('firstSeat');
   await host.getByRole('button', { name: 'Create room' }).click();
-  await expect(host).toHaveURL(/\/room\/[A-Z2-9]{10}$/);
-  const code = host.url().split('/').pop()!;
+  await expect(host).toHaveURL(/\/splendor\/play\/#[A-Z2-9]{10}$/);
+  const code = host.url().split('#')[1]!;
   await expect(host.getByRole('heading', { name: 'E2E night' })).toBeVisible();
 
-  // Friend joins through the invite link; a wrong password is refused.
-  await friend.goto(`/join/${code}`);
-  await friend.getByLabel('Room password').fill('wrong-password');
+  // Friend joins through the hash link; a wrong password is refused.
+  await friend.goto(`/splendor/play/?transport=broadcast#${code}`);
   await friend.getByLabel('Your name').fill('Ben');
+  await friend.getByLabel(/Room password/).fill('wrong-password');
   await friend.getByRole('button', { name: 'Join' }).click();
   await expect(friend.getByRole('alert').filter({ hasText: 'incorrect' })).toBeVisible();
-  await friend.getByLabel('Room password').fill('swordfish');
+
+  await friend.getByLabel(/Room password/).fill('swordfish');
   await friend.getByRole('button', { name: 'Join' }).click();
-  await expect(friend).toHaveURL(new RegExp(`/room/${code}$`));
+  await expect(friend.getByRole('heading', { name: 'E2E night' })).toBeVisible();
 
   // Lobby: friend readies up, host starts.
   await expect(host.getByRole('region', { name: 'Chat' })).toContainText('Ben joined.');
@@ -86,8 +82,12 @@ test('host and friend play an online game in real time', async ({ browser }, inf
   await friend.getByRole('button', { name: 'Send', exact: true }).click();
   await expect(host.getByRole('region', { name: 'Chat' })).toContainText('<b>hi</b> Anna');
 
-  // Reloading keeps the seat and the game (FR-5).
+  // Reloading keeps the seat and the game.
   await friend.reload();
   await waitForVersion(friend, 2);
-  await expect(friend.getByRole('region', { name: 'Ben, 0 points' })).toBeVisible();
+  await expect(friend.getByRole('region', { name: 'Game log' })).toContainText(
+    /Ben reserved a Level II \w+ card/,
+  );
+
+  await context.close();
 });
