@@ -2,7 +2,13 @@
 
 import { useMemo, useState } from 'react';
 import { SEQUENCE_ORDER, SUITS, rankOf, suitOf } from '@/games/bazar-blot/engine';
-import type { ActionIntent, CardId, GameView, PlayerView } from '@/games/bazar-blot/engine';
+import type {
+  ActionIntent,
+  BidCall,
+  CardId,
+  GameView,
+  PlayerView,
+} from '@/games/bazar-blot/engine';
 import { strings } from '@/games/bazar-blot/lib/strings';
 import type { OnlineTableProps } from '@/platform/games/table';
 import { Button, Dialog } from '@/platform/ui/Dialog';
@@ -22,21 +28,70 @@ function sortHand(hand: readonly CardId[], trump?: string): CardId[] {
   });
 }
 
+function SeatCallBubble({ call, isHigh }: { call?: BidCall; isHigh: boolean }) {
+  if (!call) return null;
+  if (call.type === 'PASS') {
+    return (
+      <span className="rounded-full border border-parchment/20 bg-felt-950/85 px-2.5 py-0.5 text-[0.7rem] font-medium whitespace-nowrap text-parchment/70 shadow">
+        {strings.bidding.pass}
+      </span>
+    );
+  }
+  if (call.type === 'KONTRA') {
+    return (
+      <span className="rounded-full bg-[#b91c1c] px-2.5 py-0.5 text-xs font-bold whitespace-nowrap text-white shadow-md">
+        {strings.bidding.kontra}
+      </span>
+    );
+  }
+  if (call.type === 'REKONTRA') {
+    return (
+      <span className="rounded-full bg-brass px-2.5 py-0.5 text-xs font-bold whitespace-nowrap text-felt-950 shadow-md">
+        {strings.bidding.rekontra}
+      </span>
+    );
+  }
+  if (call.type !== 'BID') return null;
+  const { value, strain, kaput } = call.bid;
+  const isRed = strain === 'H' || strain === 'D';
+  return (
+    <span
+      className={`flex items-center gap-1 rounded-full bg-[#faf6ee] px-2.5 py-0.5 text-xs font-bold whitespace-nowrap shadow-md ${
+        isRed ? 'text-[#b91c1c]' : 'text-[#18181b]'
+      } ${isHigh ? 'ring-2 ring-brass' : ''}`}
+    >
+      {kaput && <span className="text-[0.65rem] uppercase">K</span>}
+      <span>{strain === 'BOY' ? 'Boy' : strings.suitSymbols[strain]}</span>
+      <span>{value}</span>
+    </span>
+  );
+}
+
 function SeatBadge({
   player,
   isDealer,
   isCurrent,
   online,
   orientation = 'horizontal',
+  call,
+  isHighBid = false,
 }: {
   player: PlayerView;
   isDealer: boolean;
   isCurrent: boolean;
   online: boolean;
   orientation?: 'horizontal' | 'vertical-left' | 'vertical-right';
+  call?: BidCall;
+  isHighBid?: boolean;
 }) {
   const isVertical = orientation !== 'horizontal';
   const fanOrientation = isVertical ? 'vertical' : 'horizontal';
+  const bubblePos =
+    orientation === 'vertical-left'
+      ? 'left-full ml-2 top-1/2 -translate-y-1/2'
+      : orientation === 'vertical-right'
+        ? 'right-full mr-2 top-1/2 -translate-y-1/2'
+        : 'top-full mt-1.5 left-1/2 -translate-x-1/2';
 
   return (
     <div className="relative flex items-center justify-center">
@@ -66,6 +121,11 @@ function SeatBadge({
           </span>
         )}
       </div>
+      {call && (
+        <div className={`absolute z-30 ${bubblePos}`}>
+          <SeatCallBubble call={call} isHigh={isHighBid} />
+        </div>
+      )}
     </div>
   );
 }
@@ -121,6 +181,14 @@ export function BazarBlotTable({
 
   const isOnline = (id: string) => (presence ? presence.get(id) !== false : true);
 
+  const latestCallBySeat = useMemo(() => {
+    const map = new Map<number, BidCall>();
+    if (view.phase === 'playing') return map;
+    for (const c of view.bidding.calls) map.set(c.seat, c);
+    return map;
+  }, [view.phase, view.bidding.calls]);
+  const highSeat = view.bidding.high?.seat ?? -1;
+
   return (
     <div
       data-version={view.version}
@@ -174,6 +242,8 @@ export function BazarBlotTable({
               isDealer={topSeat === view.dealer}
               isCurrent={topSeat === view.currentSeat && view.status === 'playing'}
               online={isOnline(view.players[topSeat]!.id)}
+              call={latestCallBySeat.get(topSeat)}
+              isHighBid={topSeat === highSeat}
             />
           </div>
 
@@ -185,6 +255,8 @@ export function BazarBlotTable({
               isCurrent={leftSeat === view.currentSeat && view.status === 'playing'}
               online={isOnline(view.players[leftSeat]!.id)}
               orientation="vertical-left"
+              call={latestCallBySeat.get(leftSeat)}
+              isHighBid={leftSeat === highSeat}
             />
           </div>
 
@@ -196,6 +268,8 @@ export function BazarBlotTable({
               isCurrent={rightSeat === view.currentSeat && view.status === 'playing'}
               online={isOnline(view.players[rightSeat]!.id)}
               orientation="vertical-right"
+              call={latestCallBySeat.get(rightSeat)}
+              isHighBid={rightSeat === highSeat}
             />
           </div>
 
@@ -268,6 +342,10 @@ export function BazarBlotTable({
                 D
               </span>
             )}
+            <SeatCallBubble
+              call={latestCallBySeat.get(bottomSeat)}
+              isHigh={bottomSeat === highSeat}
+            />
             {view.combos.canDeclareBonus && (
               <button
                 type="button"

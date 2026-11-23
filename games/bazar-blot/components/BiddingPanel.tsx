@@ -45,24 +45,6 @@ export function BiddingPanel({
         </span>
       </div>
 
-      {view.bidding.calls.length > 0 && (
-        <div className="flex flex-wrap gap-1 text-[0.7rem] text-parchment/75">
-          {view.bidding.calls.slice(-6).map((c, idx) => (
-            <span
-              key={idx}
-              className="rounded border border-parchment/15 bg-felt-900/70 px-1.5 py-0.5"
-            >
-              {view.players[c.seat]?.name}:{' '}
-              {c.type === 'BID'
-                ? `${c.bid.kaput ? 'K ' : ''}${c.bid.value}${
-                    c.bid.strain === 'BOY' ? ' Boy' : strings.suitSymbols[c.bid.strain]
-                  }`
-                : c.type}
-            </span>
-          ))}
-        </div>
-      )}
-
       {!isMyTurn ? (
         <p role="status" className="text-xs text-parchment/75 sm:text-sm">
           {view.phase === 'kontra'
