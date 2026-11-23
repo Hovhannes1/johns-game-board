@@ -220,6 +220,22 @@ export class HostRoomManager<State = unknown> {
   // Creating and joining
   // ---------------------------------------------------------------------------
 
+  private validateSettings(
+    mod: AnyGameModule,
+    settings: RoomSettings,
+  ): Result<{ settings: RoomSettings }> {
+    if (!mod.options) {
+      if (settings.gameOptions && Object.keys(settings.gameOptions).length > 0) {
+        return fail('BAD_SETTINGS');
+      }
+      return { ok: true, settings };
+    }
+    const merged = { ...mod.options.defaults, ...(settings.gameOptions ?? {}) };
+    const parsed = mod.options.schema.safeParse(merged);
+    if (!parsed.success) return fail('BAD_SETTINGS');
+    return { ok: true, settings: { ...settings, gameOptions: parsed.data } };
+  }
+
   create(input: {
     gameId?: string;
     code?: string;
@@ -230,6 +246,11 @@ export class HostRoomManager<State = unknown> {
     hostColor: SeatColorId;
   }): Result<{ room: Room<State>; member: Member }> {
     if (this.rooms.size >= LIMITS.maxRooms) return fail('TOO_MANY_ROOMS');
+    const gameId = input.gameId ?? 'splendor';
+    const mod = this.resolveGame(gameId);
+    if (!mod) return fail('BAD_SETTINGS');
+    const checked = this.validateSettings(mod, input.settings);
+    if (!checked.ok) return checked;
     let code = input.code ?? newRoomCode();
     while (this.byCode.has(code)) code = newRoomCode();
     const now = this.now();
@@ -244,14 +265,14 @@ export class HostRoomManager<State = unknown> {
       open: false,
     };
     const room = this.hydrate({
-      gameId: input.gameId ?? 'splendor',
+      gameId,
       id: newId('r'),
       code,
       name: input.name,
       passwordHash: input.passwordHash,
       createdAt: now,
       updatedAt: now,
-      settings: input.settings,
+      settings: checked.settings,
       locked: false,
       status: 'lobby',
       members: [host],
@@ -408,7 +429,9 @@ export class HostRoomManager<State = unknown> {
   updateSettings(room: Room<State>, hostId: string, settings: RoomSettings): Result {
     if (!this.member(room, hostId)?.isHost) return fail('NOT_HOST');
     if (room.status === 'playing') return fail('NOT_IN_LOBBY');
-    room.settings = settings;
+    const checked = this.validateSettings(this.gameOf(room), settings);
+    if (!checked.ok) return checked;
+    room.settings = checked.settings;
     this.persist(room);
     this.events.roomChanged(room);
     return { ok: true };
@@ -439,6 +462,7 @@ export class HostRoomManager<State = unknown> {
     const record: GameRecord = {
       seats: seated.map((m) => ({ id: m.id, name: m.name })),
       ...(room.settings.firstPlayer === 'firstSeat' ? { startingPlayerIndex: 0 } : {}),
+      ...(room.settings.gameOptions ? { options: room.settings.gameOptions } : {}),
       seed: newSeed(),
       actions: [],
     };
@@ -449,6 +473,7 @@ export class HostRoomManager<State = unknown> {
         ...(record.startingPlayerIndex === undefined
           ? {}
           : { startingPlayerIndex: record.startingPlayerIndex }),
+        ...(record.options === undefined ? {} : { options: record.options }),
       },
       record.seed,
     ) as State;
@@ -533,9 +558,11 @@ export class HostRoomManager<State = unknown> {
     if (!state || room.status !== 'playing') return;
     const owner = mod.currentPlayer(state);
     if (!owner) return;
+    const startKey = mod.turnKey?.(state) ?? owner.id;
     for (let i = 0; i < 6 && room.state && mod.statusOf(room.state) === 'playing'; i++) {
       const current = mod.currentPlayer(room.state);
-      if (!current || current.id !== owner.id) break;
+      const currentKey = mod.turnKey?.(room.state) ?? current?.id ?? null;
+      if (!current || current.id !== owner.id || (i > 0 && currentKey !== startKey)) break;
       const intent = mod.autoIntent(room.state, owner.id);
       if (!intent) break;
       const result = mod.apply(room.state, owner.id, intent);
@@ -568,8 +595,9 @@ export class HostRoomManager<State = unknown> {
 
     const current = mod.currentPlayer(state)?.id;
     if (!current) return;
-    if (room.turnOwner !== current) {
-      room.turnOwner = current;
+    const turnKey = mod.turnKey?.(state) ?? current;
+    if (room.turnOwner !== turnKey) {
+      room.turnOwner = turnKey;
       room.turnStartedAt = this.now();
     }
     const member = this.member(room, current);

@@ -36,6 +36,14 @@ export default function GalleryPage() {
                   ))}
                 </div>
               )}
+              {game.id === 'bazar-blot' && (
+                <div aria-hidden="true" className="flex gap-2 text-2xl leading-none">
+                  <span>♠</span>
+                  <span className="text-[#e05252]">♥</span>
+                  <span className="text-[#e05252]">♦</span>
+                  <span>♣</span>
+                </div>
+              )}
               <div>
                 <h2 className="font-display text-2xl font-semibold text-brass group-hover:underline">
                   {game.title}
@@ -55,7 +63,7 @@ export default function GalleryPage() {
 
       <div className="flex w-full max-w-md flex-col gap-4">
         <ResumeCard />
-        <JoinCodeForm gameId="splendor" />
+        <JoinCodeForm showGamePicker />
       </div>
     </main>
   );

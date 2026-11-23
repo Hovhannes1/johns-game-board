@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import type { ActionIntent, GameView, RuleError } from '@/games/splendor/engine';
 import { getGameModule } from '@/platform/games/registry';
 import type { Envelope } from '@/platform/net/envelope';
 import { createRoomTransport } from '@/platform/net/factory';
@@ -38,6 +37,11 @@ interface HostCreateInput {
   includeTurn?: boolean;
 }
 
+interface VersionedView {
+  version: number;
+  status: string;
+}
+
 interface OnlineState {
   status: ConnectionStatus;
   icePath: IcePathKind;
@@ -47,7 +51,7 @@ interface OnlineState {
   endReason: EndReason | null;
   code: string | null;
   room: RoomView | null;
-  view: GameView | null;
+  view: VersionedView | null;
   chat: ChatMessage[];
   clockOffset: number;
   hostCreate: (
@@ -63,7 +67,7 @@ interface OnlineState {
   }) => void;
   disconnect: () => void;
   send: <E extends ClientEvent>(event: E, payload: ClientPayload<E>) => Promise<Ack>;
-  intent: (intent: ActionIntent) => Promise<RuleError | null>;
+  intent: (intent: unknown) => Promise<{ code: string; message: string } | null>;
 }
 
 let activeClient: RoomClient | null = null;
@@ -125,7 +129,7 @@ export const useOnline = create<OnlineState>()((set, get) => {
     },
     onRoom: (room: RoomView) => set({ room, clockOffset: room.serverNow - Date.now() }),
     onGame: (raw: unknown) => {
-      const view = raw as GameView;
+      const view = raw as VersionedView;
       const current = get().view;
       if (current && view.version < current.version && view.status === current.status) return;
       set({ view });
@@ -352,7 +356,7 @@ export const useOnline = create<OnlineState>()((set, get) => {
         version: view.version,
         intent,
       } as ClientPayload<'game:intent'>);
-      return ack.ok ? null : ({ code: ack.error.code, message: ack.error.message } as RuleError);
+      return ack.ok ? null : { code: ack.error.code, message: ack.error.message };
     },
   };
 });

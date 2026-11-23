@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { SEAT_COLOR_HEX } from '@/games/splendor/components/art/palette';
 import { ConfirmDialog } from '@/games/splendor/components/game/dialogs';
+import { getGameModule } from '@/platform/games/registry';
 import { Button } from '@/platform/ui/Dialog';
 import type { ChatMessage, MemberView, RoomSettings, RoomView } from '@/lib/protocol';
 import { online, strings } from '@/games/splendor/lib/strings';
@@ -59,12 +60,15 @@ function MemberRow({
 export function Lobby({
   room,
   chat,
+  gameId = 'splendor',
   onLeft,
 }: {
   room: RoomView;
   chat: readonly ChatMessage[];
+  gameId?: string;
   onLeft: () => void;
 }) {
+  const gameTitle = getGameModule(gameId)?.title ?? strings.appName;
   const send = useOnline((s) => s.send);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
@@ -108,7 +112,7 @@ export function Lobby({
       <header className="flex flex-wrap items-end gap-4">
         <div>
           <p className="text-xs tracking-[0.2em] text-parchment/60 uppercase">
-            {strings.appName}
+            {gameTitle}
             {isHost ? ' · Hosting in this tab' : ''}
             {!isHost && icePath !== 'unknown' ? ` · ${icePath}` : ''}
           </p>
@@ -212,6 +216,7 @@ export function Lobby({
               {online.settings.title}
             </h2>
             <SettingsFields
+              gameId={gameId}
               value={settings}
               disabled={!isHost}
               onChange={(value) => setDraft({ base: room.settings, value })}

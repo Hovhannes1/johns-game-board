@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useId, useState } from 'react';
 import type { FormEvent } from 'react';
+import { getGameModule, listGames } from '@/platform/games/registry';
 import { Button } from '@/platform/ui/Dialog';
 import { roomCode } from '@/lib/protocol';
 import { online } from '@/games/splendor/lib/strings';
@@ -14,9 +15,19 @@ function extractCode(raw: string): string {
 }
 
 /** Room-code or invite-link entry: navigates to `/<gameId>/play/#CODE`. */
-export function JoinCodeForm({ gameId = 'splendor' }: { gameId?: string }) {
+export function JoinCodeForm({
+  gameId = 'splendor',
+  showGamePicker = false,
+}: {
+  gameId?: string;
+  showGamePicker?: boolean;
+}) {
   const router = useRouter();
   const id = useId();
+  const games = listGames();
+  const [selectedGame, setSelectedGame] = useState(
+    () => getGameModule(gameId)?.id ?? games[0]?.id ?? 'splendor',
+  );
   const [code, setCode] = useState('');
   const [error, setError] = useState<string | null>(null);
 
@@ -24,7 +35,8 @@ export function JoinCodeForm({ gameId = 'splendor' }: { gameId?: string }) {
     event.preventDefault();
     const parsed = roomCode.safeParse(extractCode(code));
     if (!parsed.success) return setError(online.home.badCode);
-    router.push(`/${gameId}/play/#${parsed.data}`);
+    const target = showGamePicker ? selectedGame : gameId;
+    router.push(`/${target}/play/#${parsed.data}`);
   };
 
   return (
@@ -36,6 +48,20 @@ export function JoinCodeForm({ gameId = 'splendor' }: { gameId?: string }) {
         {online.home.join}
       </label>
       <span className="text-sm opacity-80">{online.home.joinHint}</span>
+      {showGamePicker && games.length > 1 && (
+        <select
+          aria-label="Game"
+          value={selectedGame}
+          onChange={(e) => setSelectedGame(e.target.value)}
+          className="rounded-lg border border-parchment/25 bg-felt-950 px-3 py-2 text-sm"
+        >
+          {games.map((g) => (
+            <option key={g.id} value={g.id}>
+              {g.title}
+            </option>
+          ))}
+        </select>
+      )}
       <div className="flex gap-2">
         <input
           id={id}

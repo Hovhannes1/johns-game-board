@@ -2,8 +2,11 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import type { ComponentType } from 'react';
 import { useEffect, useMemo, useState } from 'react';
+import type { OnlineTableProps } from '@/platform/games/table';
 import { GameTable } from '@/games/splendor/components/game/GameTable';
+import { gameTables } from './game-tables';
 import { online } from '@/games/splendor/lib/strings';
 import { roomCode } from '@/lib/protocol';
 import { BrowserRoomStore } from '@/platform/room/browser-store';
@@ -211,13 +214,15 @@ export function OnlineRoom({
     ) : null;
 
   if (room.status === 'lobby' || !view) {
-    return <Lobby room={room} chat={chat} onLeft={() => router.push(homeHref)} />;
+    return <Lobby room={room} chat={chat} gameId={gameId} onLeft={() => router.push(homeHref)} />;
   }
 
   const isHost = room.me.isHost;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Table = gameTables[gameId] ?? (GameTable as ComponentType<OnlineTableProps<any, any>>);
   return (
     <main>
-      <GameTable
+      <Table
         view={view}
         onIntent={intent}
         presence={presence}

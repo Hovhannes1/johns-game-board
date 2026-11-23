@@ -6,6 +6,7 @@ export function joinList(items: readonly string[]): string {
 /** Messages returned by the room host for lobby, session, and action problems. */
 export const serverErrors = {
   BAD_REQUEST: 'That request was not valid.',
+  BAD_SETTINGS: 'Those room settings are not valid for this game.',
   BAD_CREDENTIALS: 'Room code or password is incorrect.',
   LOCKED_OUT: (seconds: number) =>
     `Too many attempts. Try again in ${seconds} second${seconds === 1 ? '' : 's'}.`,

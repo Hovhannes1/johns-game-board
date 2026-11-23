@@ -37,7 +37,9 @@ import { TableEffects } from './TableEffects';
 export interface GameTableProps {
   view: GameView;
   /** Sends an intent to whoever is authoritative (local engine or server). */
-  onIntent: (intent: ActionIntent) => RuleError | null | Promise<RuleError | null>;
+  onIntent: (
+    intent: ActionIntent,
+  ) => { code: string; message: string } | null | Promise<{ code: string; message: string } | null>;
   onPlayAgain?: () => void;
   onNewGame?: () => void;
   onExit?: () => void;
@@ -126,7 +128,7 @@ export function GameTable({
     setError(
       problem ? { version: view.version, value: strings.table.rejected(problem.message) } : null,
     );
-    return problem;
+    return problem as RuleError | null;
   };
 
   const intent = selectionToIntent(gems);

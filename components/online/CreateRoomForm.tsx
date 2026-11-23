@@ -8,7 +8,9 @@ import { Button } from '@/platform/ui/Dialog';
 import { DEFAULT_SETTINGS, LIMITS } from '@/lib/protocol';
 import type { RoomSettings, SeatColorId } from '@/lib/protocol';
 import { online } from '@/games/splendor/lib/strings';
+import { getGameModule } from '@/platform/games/registry';
 import { BrowserRoomStore } from '@/platform/room/browser-store';
+import type { RoomData } from '@/platform/room/host-room';
 import type { RoomRecord } from '@/platform/room/store';
 import { useOnline } from '@/stores/online';
 import { ColorPicker } from './ColorPicker';
@@ -24,23 +26,31 @@ export function CreateRoomForm({ gameId = 'splendor' }: { gameId?: string }) {
   const router = useRouter();
   const id = useId();
   const hostCreate = useOnline((s) => s.hostCreate);
+  const mod = getGameModule(gameId);
 
   const [savedRooms, setSavedRooms] = useState<RoomRecord[]>([]);
-  const [name, setName] = useState('Friday Splendor');
+  const [name, setName] = useState(`Friday ${mod?.title ?? 'Splendor'}`);
   const [password, setPassword] = useState('');
   const [hostName, setHostName] = useState('Host');
   const [hostColor, setHostColor] = useState<SeatColorId>('brass');
-  const [settings, setSettings] = useState<RoomSettings>(DEFAULT_SETTINGS);
+  const [settings, setSettings] = useState<RoomSettings>(() => ({
+    ...DEFAULT_SETTINGS,
+    maxPlayers: (mod?.maxPlayers ?? 4) as 2 | 3 | 4,
+    ...(mod?.options ? { gameOptions: { ...mod.options.defaults } } : {}),
+  }));
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
     const store = new BrowserRoomStore();
     void store.open().then(() => {
-      const rooms = store.allRooms().sort((a, b) => b.updatedAt - a.updatedAt);
+      const rooms = store
+        .allRooms()
+        .filter((r) => ((r.data as RoomData | undefined)?.gameId ?? 'splendor') === gameId)
+        .sort((a, b) => b.updatedAt - a.updatedAt);
       setSavedRooms(rooms);
     });
-  }, []);
+  }, [gameId]);
 
   const createRoom = async (e: FormEvent) => {
     e.preventDefault();
@@ -163,7 +173,7 @@ export function CreateRoomForm({ gameId = 'splendor' }: { gameId?: string }) {
             onChange={setHostColor}
           />
         </div>
-        <SettingsFields value={settings} onChange={setSettings} />
+        <SettingsFields gameId={gameId} value={settings} onChange={setSettings} />
         {error && (
           <p role="alert" className="text-sm text-[#f0a0a8]">
             {error}

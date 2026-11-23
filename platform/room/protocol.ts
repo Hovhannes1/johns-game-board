@@ -64,6 +64,9 @@ export const roomSettingsSchema = z.strictObject({
   spectators: z.boolean(),
   /** Seconds a disconnected player's turn waits before being auto-played; 0 = wait. */
   disconnectSkip: z.union(DISCONNECT_SKIPS.map((n) => z.literal(n))),
+  gameOptions: z
+    .record(z.string().max(40), z.union([z.string().max(40), z.number(), z.boolean()]))
+    .optional(),
 });
 export type RoomSettings = z.infer<typeof roomSettingsSchema>;
 
@@ -150,12 +153,12 @@ export interface HistoryEntry {
   roomName: string;
   finishedAt: number;
   rounds: number;
-  reason: 'targetReached' | 'stalemate';
+  reason: 'targetReached' | 'stalemate' | 'reverseKaput';
   players: {
     name: string;
     points: number;
-    cards: number;
-    nobles: number;
+    cards?: number;
+    nobles?: number;
     rank: number;
     winner: boolean;
   }[];

@@ -1,5 +1,13 @@
 import type { ZodType } from 'zod';
 
+export type GameOptionValue = string | number | boolean;
+
+export interface GameOptionField {
+  key: string;
+  label: string;
+  choices: readonly { value: GameOptionValue; label: string }[];
+}
+
 export interface GameSeat {
   id: string;
   name: string;
@@ -9,21 +17,22 @@ export interface GameRecord<Action = unknown> {
   seats: GameSeat[];
   startingPlayerIndex?: number;
   seed: string;
+  options?: Record<string, GameOptionValue>;
   actions: Action[];
 }
 
 export interface GameStandingSummary {
   name: string;
   points: number;
-  cards: number;
-  nobles: number;
+  cards?: number;
+  nobles?: number;
   rank: number;
   winner: boolean;
 }
 
 export interface GameResultSummary {
   rounds: number;
-  reason: 'targetReached' | 'stalemate';
+  reason: 'targetReached' | 'stalemate' | 'reverseKaput';
   standings: GameStandingSummary[];
 }
 
@@ -43,7 +52,21 @@ export interface GameModule<
   readonly minPlayers: number;
   readonly maxPlayers: number;
   readonly intentSchema: ZodType<Intent>;
-  create(config: { players: GameSeat[]; startingPlayerIndex?: number }, seed: string): State;
+  readonly options?: {
+    schema: ZodType<Record<string, GameOptionValue>>;
+    defaults: Record<string, GameOptionValue>;
+    fields: readonly GameOptionField[];
+  };
+  create(
+    config: {
+      players: GameSeat[];
+      startingPlayerIndex?: number;
+      options?: Record<string, GameOptionValue>;
+    },
+    seed: string,
+  ): State;
+  /** Changes whenever a new turn starts (even if the same player moves again). Default: current player id. */
+  turnKey?(state: State): string | null;
   apply(
     state: State,
     playerId: string,

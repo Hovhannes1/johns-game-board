@@ -22,8 +22,12 @@ const config = [
   },
   {
     // The rules engine must stay pure: no framework, network, or Node I/O (FR-15).
-    files: ['games/splendor/engine/**/*.ts'],
-    ignores: ['games/splendor/engine/**/*.test.ts', 'games/splendor/engine/testing/**'],
+    files: ['games/splendor/engine/**/*.ts', 'games/bazar-blot/engine/**/*.ts'],
+    ignores: [
+      'games/splendor/engine/**/*.test.ts',
+      'games/splendor/engine/testing/**',
+      'games/bazar-blot/engine/**/*.test.ts',
+    ],
     rules: {
       'no-restricted-imports': [
         'error',

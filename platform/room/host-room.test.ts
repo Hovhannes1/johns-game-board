@@ -1,6 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { z } from 'zod';
 import type { GameState } from '@/games/splendor/engine';
 import { ROOM_CODE_LENGTH, cryptoShuffle, newRoomCode } from '@/platform/crypto';
+import type { AnyGameModule, GameSeat } from '@/platform/games/types';
 import type { Room, RoomEvents } from './host-room';
 import { HostRoomManager, LIMITS } from './host-room';
 import type { HistoryEntry, RoomSettings } from './protocol';
@@ -186,6 +188,109 @@ describe('HostRoomManager', () => {
     expect(fresh.cleanup()).toBe(0);
     expect(manager.cleanup()).toBe(1);
     expect(manager.findByCode(room.code)).toBeUndefined();
+  });
+
+  it('respects turnKey for autoplay and timer reset when the same player moves again', () => {
+    interface StubState {
+      version: number;
+      seq: number;
+      players: GameSeat[];
+      options?: Record<string, unknown>;
+    }
+    const stubModule: AnyGameModule = {
+      id: 'stub',
+      title: 'Stub',
+      tagline: 'Stub',
+      minPlayers: 2,
+      maxPlayers: 2,
+      intentSchema: z.strictObject({ type: z.literal('STEP') }),
+      options: {
+        schema: z.strictObject({ target: z.union([z.literal(101), z.literal(201)]) }),
+        defaults: { target: 101 },
+        fields: [
+          {
+            key: 'target',
+            label: 'Target',
+            choices: [
+              { value: 101, label: '101' },
+              { value: 201, label: '201' },
+            ],
+          },
+        ],
+      },
+      create(config) {
+        return {
+          version: 0,
+          seq: 0,
+          players: config.players,
+          options: config.options,
+        } satisfies StubState;
+      },
+      apply(raw) {
+        const s = raw as StubState;
+        return { ok: true, state: { ...s, version: s.version + 1, seq: s.seq + 1 } };
+      },
+      replay(rec) {
+        return {
+          version: rec.actions.length,
+          seq: rec.actions.length,
+          players: rec.seats,
+          options: rec.options,
+        };
+      },
+      viewFor: (s) => s,
+      autoIntent: () => ({ type: 'STEP' }),
+      versionOf: (s) => (s as StubState).version,
+      statusOf: () => 'playing',
+      currentPlayer: (s) => (s as StubState).players[0]!,
+      turnKey: (s) => String((s as StubState).seq),
+      playersOf: (s) => (s as StubState).players,
+      lastAction: (s) => ({ type: 'STEP', playerId: (s as StubState).players[0]!.id }),
+      resultOf: () => null,
+    };
+
+    const manager = new HostRoomManager(
+      new MemoryRoomStore(),
+      events(),
+      noopLogger,
+      () => Date.now(),
+      () => stubModule,
+    );
+    expect(
+      manager.create({
+        gameId: 'stub',
+        name: 'Bad',
+        passwordHash: '',
+        settings: { ...DEFAULT_SETTINGS, maxPlayers: 2, gameOptions: { target: 999 } },
+        hostName: 'Anna',
+        hostColor: 'brass',
+      }),
+    ).toMatchObject({ ok: false, code: 'BAD_SETTINGS' });
+
+    const created = manager.create({
+      gameId: 'stub',
+      name: 'Good',
+      passwordHash: '',
+      settings: { ...DEFAULT_SETTINGS, maxPlayers: 2, turnTimer: 60 },
+      hostName: 'Anna',
+      hostColor: 'brass',
+    });
+    if (!created.ok) throw new Error(created.message);
+    const room = created.room as Room<StubState>;
+    expect(room.settings.gameOptions).toEqual({ target: 101 });
+    const ben = manager.join(room, { name: 'Ben', color: 'teal', spectator: false });
+    if (!ben.ok) throw new Error(ben.message);
+    manager.setReady(room, ben.member.id, true);
+    manager.connect(room, created.member.id);
+    manager.connect(room, ben.member.id);
+    expect(manager.start(room, created.member.id)).toEqual({ ok: true });
+    expect(room.state!.options).toEqual({ target: 101 });
+
+    // Timeout advances only ONE step even though currentPlayer stays players[0], and resets deadline.
+    const firstDeadline = room.deadline!;
+    vi.advanceTimersByTime(61_000);
+    expect(room.state!.version).toBe(1);
+    expect(room.deadline).toBeGreaterThan(firstDeadline);
   });
 });
 

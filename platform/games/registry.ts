@@ -1,7 +1,8 @@
+import { bazarBlotModule } from '@/games/bazar-blot/module';
 import { splendorModule } from '@/games/splendor/module';
 import type { AnyGameModule } from './types';
 
-const modules: readonly AnyGameModule[] = [splendorModule];
+const modules: readonly AnyGameModule[] = [splendorModule, bazarBlotModule];
 
 export function listGames() {
   return modules;

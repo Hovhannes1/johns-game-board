@@ -1,6 +1,8 @@
 'use client';
 
 import { useId } from 'react';
+import { getGameModule } from '@/platform/games/registry';
+import type { GameOptionValue } from '@/platform/games/types';
 import { DISCONNECT_SKIPS, TURN_TIMERS } from '@/lib/protocol';
 import type { RoomSettings } from '@/lib/protocol';
 import { online } from '@/games/splendor/lib/strings';
@@ -46,25 +48,33 @@ function Select<T extends string | number>({
   );
 }
 
-/** Room options from spec 3.7. */
+/** Room options from spec 3.7, plus per-game options when provided by the module. */
 export function SettingsFields({
+  gameId,
   value,
   onChange,
   disabled,
 }: {
+  gameId?: string;
   value: RoomSettings;
   onChange: (next: RoomSettings) => void;
   disabled?: boolean;
 }) {
+  const mod = gameId ? getGameModule(gameId) : undefined;
+  const minP = mod?.minPlayers ?? 2;
+  const maxP = mod?.maxPlayers ?? 4;
+  const playerChoices = ([2, 3, 4] as const).filter((n) => n >= minP && n <= maxP);
   const set = <K extends keyof RoomSettings>(key: K, v: RoomSettings[K]) =>
     onChange({ ...value, [key]: v });
+  const setOption = (key: string, v: GameOptionValue) =>
+    onChange({ ...value, gameOptions: { ...(value.gameOptions ?? {}), [key]: v } });
   return (
     <div className="grid gap-3 sm:grid-cols-2">
       <Select
         label={t.maxPlayers}
         value={value.maxPlayers}
         disabled={disabled}
-        options={[2, 3, 4].map((n) => ({ value: n as 2 | 3 | 4, label: String(n) }))}
+        options={playerChoices.map((n) => ({ value: n, label: String(n) }))}
         onChange={(v) => set('maxPlayers', v)}
       />
       <Select
@@ -113,6 +123,22 @@ export function SettingsFields({
         />
         {t.spectators}
       </label>
+      {mod?.options?.fields.map((field) => {
+        const cur = value.gameOptions?.[field.key] ?? mod.options!.defaults[field.key]!;
+        return (
+          <Select
+            key={field.key}
+            label={field.label}
+            value={String(cur)}
+            disabled={disabled}
+            options={field.choices.map((c) => ({ value: String(c.value), label: c.label }))}
+            onChange={(raw) => {
+              const found = field.choices.find((c) => String(c.value) === raw);
+              if (found) setOption(field.key, found.value);
+            }}
+          />
+        );
+      })}
     </div>
   );
 }
