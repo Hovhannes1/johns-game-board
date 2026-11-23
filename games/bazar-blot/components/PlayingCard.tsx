@@ -140,8 +140,9 @@ function CardCenter({
         <span
           key={idx}
           style={{ left: `${x}%`, top: `${y}%` }}
-          className={`absolute -translate-x-1/2 -translate-y-1/2 leading-none ${pipSize} ${inv ? 'rotate-180' : ''
-            }`}
+          className={`absolute -translate-x-1/2 -translate-y-1/2 leading-none ${pipSize} ${
+            inv ? 'rotate-180' : ''
+          }`}
         >
           {symbol}
         </span>
@@ -195,8 +196,9 @@ export function PlayingCard({
   const label = `Play ${rank} of ${strings.suits[suit]}`;
 
   const faceBg = onClick && (!playable || disabled) ? 'bg-[#c9c3b8]' : 'bg-[#faf6ee]';
-  const baseClass = `${dims} ${className} relative flex flex-col justify-between border ${faceBg} font-bold shadow-md select-none transition-transform duration-150 ${colorClass} ${isTrump ? 'ring-2 ring-brass border-brass' : 'border-black/25'
-    }`;
+  const baseClass = `${dims} ${className} relative flex flex-col justify-between border ${faceBg} font-bold shadow-md select-none transition-transform duration-150 ${colorClass} ${
+    isTrump ? 'ring-2 ring-brass border-brass' : 'border-black/25'
+  }`;
 
   const content = (
     <>
@@ -221,10 +223,11 @@ export function PlayingCard({
         aria-label={label}
         disabled={disabled}
         onClick={onClick}
-        className={`${baseClass} ${playable && !disabled
-          ? 'cursor-pointer hover:z-20 hover:-translate-y-4 hover:shadow-xl focus-visible:z-20 focus-visible:-translate-y-4 focus-visible:outline-2 focus-visible:outline-brass'
-          : 'cursor-default'
-          }`}
+        className={`${baseClass} ${
+          playable && !disabled
+            ? 'cursor-pointer hover:z-20 hover:-translate-y-4 hover:shadow-xl focus-visible:z-20 focus-visible:-translate-y-4 focus-visible:outline-2 focus-visible:outline-brass'
+            : 'cursor-default'
+        }`}
       >
         {content}
       </button>
@@ -249,10 +252,11 @@ export function CardBackFan({
       {Array.from({ length: shown }).map((_, i) => (
         <div
           key={i}
-          className={`rounded-lg border border-brass/60 bg-[#1a2b4c] shadow-md ${isVertical
-            ? `h-10 w-14 sm:h-14 sm:w-20 ${i > 0 ? '-mt-6 sm:-mt-9' : ''}`
-            : `h-14 w-10 sm:h-20 sm:w-14 ${i > 0 ? '-ml-5 sm:-ml-7' : ''}`
-            }`}
+          className={`rounded-lg border border-brass/60 bg-[#1a2b4c] shadow-md ${
+            isVertical
+              ? `h-10 w-14 sm:h-14 sm:w-20 ${i > 0 ? '-mt-6 sm:-mt-9' : ''}`
+              : `h-14 w-10 sm:h-20 sm:w-14 ${i > 0 ? '-ml-5 sm:-ml-7' : ''}`
+          }`}
         >
           <div className="m-1 h-[calc(100%-8px)] rounded-sm border border-brass/30 bg-[repeating-linear-gradient(45deg,rgba(201,168,76,0.18)_0_3px,transparent_3px_6px)]" />
         </div>
