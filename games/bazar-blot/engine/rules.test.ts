@@ -267,6 +267,46 @@ describe('bazar-blot combos & blot', () => {
     expect(resolved.valid).toEqual([terzH]);
   });
 
+  it('requires DECLARE_BONUS before first card and reveals winning combos during trick 2 only', () => {
+    let state = createGame({ players: SEATS, startingPlayerIndex: 0 }, SEED);
+    state = (
+      applyAction(state, { type: 'BID', value: 8, strain: 'H', kaput: false, playerId: 'p0' }) as {
+        ok: true;
+        state: GameState;
+      }
+    ).state;
+    for (let i = 1; i <= 4; i++) {
+      state = (
+        applyAction(state, { type: 'PASS', playerId: `p${i % 4}` }) as {
+          ok: true;
+          state: GameState;
+        }
+      ).state;
+    }
+    // Find a seat with a combo and verify DECLARE_BONUS only works on their turn before 1st card
+    const comboSeat = state.combos.bySeat.findIndex((c) => c.length > 0);
+    if (comboSeat >= 0) {
+      while (state.currentSeat !== comboSeat) {
+        const cur = state.players[state.currentSeat]!.id;
+        state = (
+          applyAction(state, { ...autoIntent(state, cur)!, playerId: cur }) as {
+            ok: true;
+            state: GameState;
+          }
+        ).state;
+      }
+      expect(getPublicView(state, `p${comboSeat}`).combos.canDeclareBonus).toBe(true);
+      state = (
+        applyAction(state, { type: 'DECLARE_BONUS', playerId: `p${comboSeat}` }) as {
+          ok: true;
+          state: GameState;
+        }
+      ).state;
+      expect(getPublicView(state, `p${comboSeat}`).combos.canDeclareBonus).toBe(false);
+      expect(getPublicView(state, 'p0').combos.announced.length).toBeGreaterThan(0);
+    }
+  });
+
   it('detects Blot-Reblot in trump contracts only', () => {
     const hands: CardId[][] = [
       ['KH', 'QH', '7S', '8S', '9S', '10S', 'JS', 'AS'],

@@ -6,6 +6,7 @@ export type RuleErrorCode =
   | 'INVALID_BID'
   | 'CANNOT_KONTRA'
   | 'CANNOT_REKONTRA'
+  | 'CANNOT_DECLARE_BONUS'
   | 'CARD_NOT_IN_HAND'
   | 'MUST_FOLLOW_SUIT'
   | 'MUST_TRUMP'
@@ -24,6 +25,7 @@ export const ruleMessages: Record<RuleErrorCode, string> = {
   INVALID_BID: 'Your bid must be higher than the current bid.',
   CANNOT_KONTRA: 'Only a defender can declare Kontra against an active bid.',
   CANNOT_REKONTRA: 'Only the bidding team can declare Rekontra.',
+  CANNOT_DECLARE_BONUS: 'You have no undeclared combinations to announce before your first card.',
   CARD_NOT_IN_HAND: 'You do not hold that card.',
   MUST_FOLLOW_SUIT: 'You must follow the led suit.',
   MUST_TRUMP: 'You must play a trump card.',

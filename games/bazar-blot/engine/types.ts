@@ -92,6 +92,7 @@ export type ActionIntent =
   | { type: 'PASS' }
   | { type: 'KONTRA' }
   | { type: 'REKONTRA' }
+  | { type: 'DECLARE_BONUS' }
   | { type: 'PLAY'; card: CardId };
 
 export type GameAction = ActionIntent & { playerId: string };
@@ -138,10 +139,10 @@ export interface GameState {
     tricks: [number, number];
   };
   combos: {
-    /** Detected combos per seat, announced when that seat plays its first card. */
+    /** Detected combos per seat, only valid if the player clicks Bonus before their 1st card. */
     bySeat: Combo[][];
-    /** Seats that have already played at least one card this round. */
-    announcedSeats: boolean[];
+    /** Seats that clicked Bonus before playing their first card. */
+    declaredSeats: boolean[];
     resolved: {
       winningTeam: TeamIndex | null;
       valid: Combo[];

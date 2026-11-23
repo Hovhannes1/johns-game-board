@@ -1,50 +1,56 @@
 'use client';
 
 import type { GameView } from '@/games/bazar-blot/engine';
+import { teamOf } from '@/games/bazar-blot/engine';
 import { strings } from '@/games/bazar-blot/lib/strings';
 
 export function ScoreBoard({ view }: { view: GameView }) {
-  const team0Names = `${view.players[0]?.name} & ${view.players[2]?.name}`;
-  const team1Names = `${view.players[1]?.name} & ${view.players[3]?.name}`;
+  const myTeam = view.viewerSeat !== null ? teamOf(view.viewerSeat) : 0;
+  const oppTeam = 1 - myTeam;
+  const myLabel = view.viewerSeat !== null ? strings.table.us : strings.table.teamLabel(0);
+  const oppLabel = view.viewerSeat !== null ? strings.table.them : strings.table.teamLabel(1);
   const c = view.contract;
 
   return (
-    <div className="grid gap-3 sm:grid-cols-3">
-      <div className="rounded-xl border border-parchment/15 bg-felt-900/75 px-3 py-2">
-        <div className="text-xs text-parchment/60">{strings.table.teamLabel(0)}</div>
-        <div className="truncate text-sm font-semibold">{team0Names}</div>
-        <div className="mt-0.5 font-display text-2xl text-brass tabular-nums">
-          {view.scores[0]}{' '}
-          <span className="text-xs font-sans text-parchment/55">/ {view.targetScore}</span>
+    <div className="flex flex-col items-end gap-1">
+      <div className="grid grid-cols-2 divide-x divide-parchment/15 overflow-hidden rounded-xl border border-brass/35 bg-felt-950/90 text-center shadow-lg backdrop-blur-xs">
+        <div className="px-2.5 py-1 sm:px-3">
+          <div className="text-[0.65rem] font-semibold tracking-wider text-gem-emerald uppercase">
+            {myLabel}
+          </div>
+          <div className="font-display text-base leading-tight font-bold text-parchment tabular-nums sm:text-lg">
+            {view.scores[myTeam]}
+            <span className="text-[0.65rem] font-normal text-parchment/55">
+              /{view.targetScore}
+            </span>
+          </div>
+        </div>
+        <div className="px-2.5 py-1 sm:px-3">
+          <div className="text-[0.65rem] font-semibold tracking-wider text-[#f0a0a8] uppercase">
+            {oppLabel}
+          </div>
+          <div className="font-display text-base leading-tight font-bold text-parchment tabular-nums sm:text-lg">
+            {view.scores[oppTeam]}
+            <span className="text-[0.65rem] font-normal text-parchment/55">
+              /{view.targetScore}
+            </span>
+          </div>
         </div>
       </div>
 
-      <div className="flex flex-col justify-center rounded-xl border border-brass/30 bg-felt-950/70 px-3 py-2 text-center">
-        <div className="text-xs text-parchment/60">{strings.table.round(view.roundNo)}</div>
-        {c ? (
-          <div className="mt-0.5 text-sm font-semibold text-brass">
+      {c && (
+        <div className="flex items-center gap-1.5 rounded-full border border-brass/30 bg-felt-950/85 px-2.5 py-0.5 text-[0.7rem] font-semibold text-brass shadow">
+          <span>
             {c.kaput ? `${strings.bidding.kaput} ` : ''}
-            {c.value} {strings.strains[c.strain]}
-            {c.kontra === 1 ? ' · Kontra' : c.kontra === 2 ? ' · Rekontra' : ''}
-          </div>
-        ) : (
-          <div className="mt-0.5 text-sm text-parchment/75">{strings.bidding.title}</div>
-        )}
-        {c && (
-          <div className="text-xs text-parchment/65">
-            {strings.table.tricks}: {view.tricksWon[0]} – {view.tricksWon[1]}
-          </div>
-        )}
-      </div>
-
-      <div className="rounded-xl border border-parchment/15 bg-felt-900/75 px-3 py-2 text-right">
-        <div className="text-xs text-parchment/60">{strings.table.teamLabel(1)}</div>
-        <div className="truncate text-sm font-semibold">{team1Names}</div>
-        <div className="mt-0.5 font-display text-2xl text-brass tabular-nums">
-          {view.scores[1]}{' '}
-          <span className="text-xs font-sans text-parchment/55">/ {view.targetScore}</span>
+            {c.value} {c.strain === 'BOY' ? 'Boy' : strings.suitSymbols[c.strain]}
+            {c.kontra === 1 ? ' ×K' : c.kontra === 2 ? ' ×RK' : ''}
+          </span>
+          <span className="text-parchment/40">·</span>
+          <span className="text-parchment/80 tabular-nums">
+            {view.tricksWon[myTeam]}–{view.tricksWon[oppTeam]}
+          </span>
         </div>
-      </div>
+      )}
     </div>
   );
 }

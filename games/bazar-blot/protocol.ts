@@ -16,6 +16,7 @@ export const intentSchema = z.discriminatedUnion('type', [
   z.strictObject({ type: z.literal('PASS') }),
   z.strictObject({ type: z.literal('KONTRA') }),
   z.strictObject({ type: z.literal('REKONTRA') }),
+  z.strictObject({ type: z.literal('DECLARE_BONUS') }),
   z.strictObject({ type: z.literal('PLAY'), card: cardSchema }),
 ]);
 

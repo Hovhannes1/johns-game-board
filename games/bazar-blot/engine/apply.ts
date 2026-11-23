@@ -36,7 +36,7 @@ function startNewRound(state: GameState, dealer: number): void {
   state.captured = { points: [0, 0], tricks: [0, 0] };
   state.combos = {
     bySeat: [[], [], [], []],
-    announcedSeats: [false, false, false, false],
+    declaredSeats: [false, false, false, false],
     resolved: null,
     blot: null,
   };
@@ -59,7 +59,7 @@ function finalizeContract(state: GameState, kontra: 0 | 1 | 2): void {
   state.trick = { leader, plays: [] };
   state.combos = {
     bySeat: state.hands.map((hand, seat) => detectCombos(hand, seat, contract.strain)),
-    announcedSeats: [false, false, false, false],
+    declaredSeats: [false, false, false, false],
     resolved: null,
     blot: detectBlot(state.hands, contract.strain),
   };
@@ -152,6 +152,20 @@ export function applyAction(state: GameState, action: GameAction): ApplyResult {
     return { ok: false, error: ruleError('WRONG_PHASE') };
   }
 
+  if (intent.type === 'DECLARE_BONUS') {
+    if (
+      next.phase !== 'playing' ||
+      next.hands[seat]!.length !== 8 ||
+      next.combos.declaredSeats[seat] ||
+      next.combos.bySeat[seat]!.length === 0
+    ) {
+      return { ok: false, error: ruleError('CANNOT_DECLARE_BONUS') };
+    }
+    next.combos.declaredSeats[seat] = true;
+    next.turnSeq -= 1;
+    return { ok: true, state: next };
+  }
+
   if (intent.type === 'PLAY') {
     if (next.phase !== 'playing' || !next.contract) {
       return { ok: false, error: ruleError('WRONG_PHASE') };
@@ -164,7 +178,6 @@ export function applyAction(state: GameState, action: GameAction): ApplyResult {
 
     // Remove card from hand and add to trick
     next.hands[seat] = hand.filter((c) => c !== intent.card);
-    next.combos.announcedSeats[seat] = true;
     next.trick.plays.push({ seat, card: intent.card });
 
     // Track Blot-Reblot if K or Q of trump is played
@@ -199,9 +212,12 @@ export function applyAction(state: GameState, action: GameAction): ApplyResult {
     };
     next.trick = { leader: winnerPlay.seat, plays: [] };
 
-    // After trick 1, resolve combinations so winning team's cards are revealed
+    // After trick 1, resolve only combinations that players explicitly declared via Bonus
     if (next.combos.resolved === null) {
-      next.combos.resolved = resolveCombos(next.combos.bySeat, next.contract.strain, next.dealer);
+      const declared = next.combos.bySeat.map((list, s) =>
+        next.combos.declaredSeats[s] ? list : [],
+      );
+      next.combos.resolved = resolveCombos(declared, next.contract.strain, next.dealer);
     }
 
     if (!isLastTrick) {

@@ -65,7 +65,7 @@ export function createGame(config: GameConfig, seed: string): GameState {
     },
     combos: {
       bySeat: [[], [], [], []],
-      announcedSeats: [false, false, false, false],
+      declaredSeats: [false, false, false, false],
       resolved: null,
       blot: null,
     },

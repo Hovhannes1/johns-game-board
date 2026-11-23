@@ -58,6 +58,7 @@ export interface GameView {
   legalCards: CardId[];
   tricksWon: [number, number];
   combos: {
+    canDeclareBonus: boolean;
     announced: AnnouncedComboSummary[];
     revealed: Combo[] | null;
     winningTeam: TeamIndex | null;
@@ -83,7 +84,7 @@ export function getPublicView(state: GameState, viewerId: string | null): GameVi
 
   const announced: AnnouncedComboSummary[] = [];
   for (let s = 0; s < 4; s++) {
-    if (!state.combos.announcedSeats[s]) continue;
+    if (!state.combos.declaredSeats[s]) continue;
     for (const c of state.combos.bySeat[s]!) {
       announced.push({ seat: s, kind: c.kind, points: c.points });
     }
@@ -96,6 +97,13 @@ export function getPublicView(state: GameState, viewerId: string | null): GameVi
 
   const isViewerTurn =
     viewerSeat !== null && viewerSeat === state.currentSeat && state.status === 'playing';
+  const tricksPlayed = state.captured.tricks[0] + state.captured.tricks[1];
+  const canDeclareBonus =
+    isViewerTurn &&
+    state.phase === 'playing' &&
+    state.hands[viewerSeat]!.length === 8 &&
+    !state.combos.declaredSeats[viewerSeat] &&
+    state.combos.bySeat[viewerSeat]!.length > 0;
 
   return {
     version: state.version,
@@ -126,8 +134,12 @@ export function getPublicView(state: GameState, viewerId: string | null): GameVi
         : [],
     tricksWon: [...state.captured.tricks] as [number, number],
     combos: {
+      canDeclareBonus,
       announced,
-      revealed: state.combos.resolved ? state.combos.resolved.valid.map((c) => ({ ...c })) : null,
+      revealed:
+        state.combos.resolved && tricksPlayed < 2
+          ? state.combos.resolved.valid.map((c) => ({ ...c }))
+          : null,
       winningTeam: state.combos.resolved ? state.combos.resolved.winningTeam : null,
       blot: blotRevealed,
     },
