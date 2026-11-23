@@ -42,6 +42,7 @@ interface OnlineState {
   status: ConnectionStatus;
   icePath: IcePathKind;
   isHosting: boolean;
+  joining: boolean;
   joinError: string | null;
   endReason: EndReason | null;
   code: string | null;
@@ -113,6 +114,7 @@ export const useOnline = create<OnlineState>()((set, get) => {
       set((s) => ({
         status,
         icePath: info?.path ?? s.icePath,
+        joining: status === 'connecting' ? s.joining : false,
         joinError:
           status === 'rejected'
             ? (info?.message ?? 'Unable to join.')
@@ -183,6 +185,7 @@ export const useOnline = create<OnlineState>()((set, get) => {
     status: 'idle',
     icePath: 'unknown',
     isHosting: false,
+    joining: false,
     joinError: null,
     endReason: null,
     code: null,
@@ -216,6 +219,12 @@ export const useOnline = create<OnlineState>()((set, get) => {
         hostColor: input.hostColor,
       });
       if (!created.ok) return { ok: false, message: created.message };
+
+      try {
+        window.sessionStorage?.setItem(`jgb:host:${created.room.code}`, '1');
+      } catch {
+        // Ignore storage errors.
+      }
 
       set({
         status: 'connecting',
@@ -307,7 +316,7 @@ export const useOnline = create<OnlineState>()((set, get) => {
     },
 
     submitJoin: (join) => {
-      set({ joinError: null });
+      set({ joinError: null, joining: true });
       activeClient?.submitJoin(join);
     },
 

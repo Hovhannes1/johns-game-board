@@ -31,3 +31,6 @@ Thumbs.db
 # copyrighted illustrated art: never publish
 assets/*.jpg
 public/art/
+
+# local agent skills (not pushed to GitHub)
+.agents/

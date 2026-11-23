@@ -3,9 +3,24 @@ import type { Envelope } from './envelope';
 import type { Transport } from './transport';
 import { TrysteroTransport } from './trystero';
 
+const TRANSPORT_KEY = 'jgb:transport';
+
 export function isBroadcastMode(): boolean {
   if (typeof window === 'undefined') return false;
-  return new URLSearchParams(window.location.search).get('transport') === 'broadcast';
+  const param = new URLSearchParams(window.location.search).get('transport');
+  if (param === 'broadcast') {
+    try {
+      window.sessionStorage?.setItem(TRANSPORT_KEY, 'broadcast');
+    } catch {
+      // Ignore storage errors.
+    }
+    return true;
+  }
+  try {
+    return window.sessionStorage?.getItem(TRANSPORT_KEY) === 'broadcast';
+  } catch {
+    return false;
+  }
 }
 
 export function createRoomTransport(opts: {

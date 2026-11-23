@@ -18,7 +18,7 @@ const t = online.join;
  */
 export function JoinForm({ code, gameId = 'splendor' }: { code: string; gameId?: string }) {
   const id = useId();
-  const status = useOnline((s) => s.status);
+  const joining = useOnline((s) => s.joining);
   const joinError = useOnline((s) => s.joinError);
   const submitJoin = useOnline((s) => s.submitJoin);
 
@@ -27,7 +27,7 @@ export function JoinForm({ code, gameId = 'splendor' }: { code: string; gameId?:
   const [color, setColor] = useState<SeatColorId>('teal');
   const [spectator, setSpectator] = useState(false);
 
-  const busy = status === 'connecting';
+  const busy = joining;
 
   const submit = (event: FormEvent) => {
     event.preventDefault();

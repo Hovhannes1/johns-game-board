@@ -93,6 +93,13 @@ export function CreateRoomForm({ gameId = 'splendor' }: { gameId?: string }) {
                 <span className="font-mono text-xs text-parchment/60">{r.code}</span>
                 <Link
                   href={`/${gameId}/play/#${r.code}`}
+                  onClick={() => {
+                    try {
+                      window.sessionStorage?.setItem(`jgb:host:${r.code}`, '1');
+                    } catch {
+                      // Ignore.
+                    }
+                  }}
                   className="ml-auto rounded-lg bg-brass px-3 py-1 font-semibold text-felt-950 hover:bg-[#d9b45c]"
                 >
                   Resume

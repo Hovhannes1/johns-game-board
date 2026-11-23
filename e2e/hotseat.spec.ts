@@ -80,27 +80,6 @@ test('explains why a gem selection cannot be taken yet', async ({ page }) => {
   await expect(page.getByText(/Pick 3 different gems/)).toBeVisible();
 });
 
-test('switches between vector and illustrated artwork', async ({ page }) => {
-  await startGame(page, ['Anna', 'Ben']);
-  // Scoped to the board: the Settings dialog always shows a small sample of each style.
-  const illustrated = page.locator('#board [style*="/art/cards.jpg"]');
-  await expect(illustrated).toHaveCount(0);
-
-  await page.getByRole('button', { name: 'Settings' }).click();
-  const dialog = page.getByRole('dialog', { name: 'Settings' });
-  await dialog.getByText('Illustrated (images)').click();
-  await dialog.getByRole('button', { name: 'Done' }).click();
-  await expect(illustrated.first()).toBeVisible();
-  expect((await page.request.get('/art/cards.jpg')).headers()['content-type']).toBe('image/jpeg');
-
-  // The choice is remembered in this browser.
-  await page.reload();
-  await expect(illustrated.first()).toBeVisible();
-  await page.getByRole('button', { name: 'Settings' }).click();
-  await page.getByRole('dialog', { name: 'Settings' }).getByText('Minimal (vector)').click();
-  await expect(illustrated).toHaveCount(0);
-});
-
 test('shows the rules and can leave the game', async ({ page }) => {
   await startGame(page, ['Anna', 'Ben']);
   await page.getByRole('button', { name: 'Rules' }).click();

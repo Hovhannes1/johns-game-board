@@ -1,4 +1,5 @@
 import { randomKey } from '@/platform/crypto';
+import { isBroadcastMode } from '@/platform/net/factory';
 import type { HistoryEntry } from './protocol';
 import type { RoomRecord, RoomStore } from './store';
 
@@ -19,9 +20,7 @@ export function getOrCreateClientKey(roomCode: string): string {
   const key = `${CLIENT_KEY_PREFIX}${roomCode.toUpperCase()}`;
   try {
     if (typeof window !== 'undefined') {
-      const useSession =
-        new URLSearchParams(window.location.search).get('transport') === 'broadcast';
-      const storage = useSession ? window.sessionStorage : window.localStorage;
+      const storage = isBroadcastMode() ? window.sessionStorage : window.localStorage;
       if (storage) {
         const existing = storage.getItem(key);
         if (existing) return existing;

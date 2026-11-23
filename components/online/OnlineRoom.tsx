@@ -44,6 +44,7 @@ export function OnlineRoom({
     status,
     icePath,
     isHosting,
+    joining,
     endReason,
     room,
     view,
@@ -77,16 +78,26 @@ export function OnlineRoom({
   useEffect(() => {
     if (!resolvedCode) return;
     let alive = true;
-    const store = new BrowserRoomStore();
-    void store.open().then(async () => {
-      if (!alive) return;
-      const saved = store.allRooms().find((r) => r.code === resolvedCode);
-      if (saved) {
-        const ok = await resumeHost(resolvedCode, gameId);
-        if (ok || !alive) return;
-      }
+    let isHostTab = false;
+    try {
+      isHostTab = window.sessionStorage?.getItem(`jgb:host:${resolvedCode}`) === '1';
+    } catch {
+      isHostTab = false;
+    }
+    if (isHostTab) {
+      const store = new BrowserRoomStore();
+      void store.open().then(async () => {
+        if (!alive) return;
+        const saved = store.allRooms().find((r) => r.code === resolvedCode);
+        if (saved) {
+          const ok = await resumeHost(resolvedCode, gameId);
+          if (ok || !alive) return;
+        }
+        connectClient(resolvedCode, gameId);
+      });
+    } else {
       connectClient(resolvedCode, gameId);
-    });
+    }
     return () => {
       alive = false;
       disconnect();
@@ -126,7 +137,7 @@ export function OnlineRoom({
     );
   }
 
-  if (status === 'needs-join' || status === 'rejected') {
+  if (status === 'needs-join' || status === 'rejected' || (!room && joining)) {
     if (!resolvedCode) return null;
     return <JoinForm code={resolvedCode} gameId={gameId} />;
   }
