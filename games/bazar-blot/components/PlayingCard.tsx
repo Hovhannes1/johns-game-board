@@ -112,7 +112,7 @@ function CardCenter({
 }: {
   rank: Rank;
   symbol: string;
-  size: 'xs' | 'sm' | 'md';
+  size: 'xs' | 'sm' | 'trick' | 'md';
 }) {
   if (size === 'xs') {
     return <span className="self-center text-xs leading-none">{symbol}</span>;
@@ -167,7 +167,7 @@ export function PlayingCard({
   playable?: boolean;
   disabled?: boolean;
   onClick?: () => void;
-  size?: 'xs' | 'sm' | 'md';
+  size?: 'xs' | 'sm' | 'trick' | 'md';
   className?: string;
 }) {
   const dims =
@@ -175,7 +175,9 @@ export function PlayingCard({
       ? 'h-10 w-7 text-[0.6rem] rounded-md p-0.5'
       : size === 'sm'
         ? 'h-20 w-14 sm:h-24 sm:w-17 text-xs rounded-xl p-1'
-        : 'h-20 w-12 sm:h-32 sm:w-22 text-[0.7rem] sm:text-sm rounded-lg sm:rounded-xl p-1 sm:p-1.5';
+        : size === 'trick'
+          ? 'h-22 w-15 sm:h-28 sm:w-20 text-xs sm:text-sm rounded-xl p-1 sm:p-1.5'
+          : 'h-20 w-12 sm:h-32 sm:w-22 text-[0.7rem] sm:text-sm rounded-lg sm:rounded-xl p-1 sm:p-1.5';
 
   if (faceDown || !card) {
     return (
@@ -208,7 +210,7 @@ export function PlayingCard({
       </span>
       <CardCenter rank={rank} symbol={symbol} size={size} />
       {size !== 'xs' && (
-        <span className="leading-none text-right rotate-180">
+        <span className="self-end leading-none rotate-180">
           {rank}
           <span className="ml-0.5">{symbol}</span>
         </span>

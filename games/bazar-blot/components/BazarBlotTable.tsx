@@ -233,8 +233,8 @@ export function BazarBlotTable({
       )}
 
       {/* Main Felt Table Arena */}
-      <div className="relative mx-auto my-4 flex w-full max-w-5xl flex-1 items-center justify-center px-3 sm:px-6">
-        <div className="relative flex min-h-[24rem] w-full flex-col items-center justify-center rounded-[2.5rem] border-[6px] border-[#6b4423] bg-[radial-gradient(ellipse_at_center,#1f5c3a_0%,#133b25_70%,#0d291a_100%)] px-8 py-10 shadow-[inset_0_0_50px_rgba(0,0,0,0.55),0_16px_40px_rgba(0,0,0,0.55)] ring-2 ring-brass/35 sm:min-h-[30rem] sm:rounded-[6rem] sm:border-[10px] sm:px-14 sm:py-12">
+      <div className="relative mx-auto mt-4 mb-16 flex w-full max-w-5xl flex-1 items-center justify-center px-3 sm:mb-24 sm:px-6">
+        <div className="relative flex min-h-[24rem] w-full flex-col items-center justify-center rounded-[2.5rem] border-[6px] border-[#6b4423] bg-[radial-gradient(ellipse_at_center,#1f5c3a_0%,#133b25_70%,#0d291a_100%)] px-8 pt-10 pb-16 shadow-[inset_0_0_50px_rgba(0,0,0,0.55),0_16px_40px_rgba(0,0,0,0.55)] ring-2 ring-brass/35 sm:min-h-[30rem] sm:rounded-[6rem] sm:border-[10px] sm:px-14 sm:pt-12 sm:pb-20">
           {/* Top seat (Partner) straddling top border */}
           <div className="absolute -top-6 left-1/2 z-20 -translate-x-1/2 sm:-top-8">
             <SeatBadge
@@ -287,20 +287,15 @@ export function BazarBlotTable({
                 className="flex flex-wrap items-center justify-center gap-2 rounded-xl border border-brass/45 bg-felt-950/85 px-2.5 py-1.5 shadow-lg"
               >
                 {view.combos.revealed.map((c) => (
-                  <div key={c.id} className="flex items-center gap-1.5">
-                    <span className="text-[0.7rem] font-semibold text-brass">
-                      {view.players[c.seat]?.name} ({strings.combos[c.kind]}):
-                    </span>
-                    <div className="flex">
-                      {c.cards.map((card, idx) => (
-                        <PlayingCard
-                          key={card}
-                          card={card}
-                          size="xs"
-                          className={idx > 0 ? '-ml-1.5' : ''}
-                        />
-                      ))}
-                    </div>
+                  <div key={c.id} className="flex">
+                    {c.cards.map((card, idx) => (
+                      <PlayingCard
+                        key={card}
+                        card={card}
+                        size="xs"
+                        className={idx > 0 ? '-ml-1.5' : ''}
+                      />
+                    ))}
                   </div>
                 ))}
               </div>
@@ -324,10 +319,10 @@ export function BazarBlotTable({
           </div>
 
           {/* Bottom status indicator + Bonus button */}
-          <div className="absolute bottom-3 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2">
+          <div className="absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 sm:bottom-12">
             <span
               role="status"
-              className={`rounded-full px-3 py-0.5 text-xs font-semibold shadow ${
+              className={`rounded-full px-3 py-0.5 text-xs font-semibold whitespace-nowrap shadow ${
                 isMyTurn
                   ? 'bg-brass text-felt-950'
                   : 'border border-parchment/20 bg-felt-950/80 text-parchment/80'
@@ -356,37 +351,46 @@ export function BazarBlotTable({
               </button>
             )}
           </div>
+
+          {/* Bottom Hand straddling bottom table rim (~20% under cards) */}
+          {view.viewerSeat !== null && (
+            <section
+              aria-label="Your hand"
+              className="absolute -bottom-14 left-1/2 z-30 flex max-w-full -translate-x-1/2 items-end justify-center sm:-bottom-22"
+            >
+              <div className="flex items-end justify-center">
+                {myHand.map((card, i) => {
+                  const canPlay = view.phase === 'playing' && isMyTurn && legalSet.has(card);
+                  const offset = i - (myHand.length - 1) / 2;
+                  const deg = offset * 2.5;
+                  const yPx = Math.round(offset * offset * 1.4);
+                  return (
+                    <div
+                      key={card}
+                      style={{ transform: `translateY(${yPx}px) rotate(${deg}deg)` }}
+                      className={`transition-transform duration-150 hover:z-20 ${
+                        i > 0 ? '-ml-3 sm:-ml-6' : ''
+                      }`}
+                    >
+                      <PlayingCard
+                        card={card}
+                        isTrump={
+                          view.contract !== null &&
+                          view.contract.strain !== 'BOY' &&
+                          card.endsWith(view.contract.strain)
+                        }
+                        playable={canPlay}
+                        disabled={!canPlay}
+                        onClick={() => void sendIntent({ type: 'PLAY', card })}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          )}
         </div>
       </div>
-
-      {/* Bottom Hand */}
-      {view.viewerSeat !== null && (
-        <section
-          aria-label="Your hand"
-          className="z-20 mx-auto flex max-w-full items-end justify-center pb-1 pt-2"
-        >
-          <div className="flex items-end justify-center">
-            {myHand.map((card, i) => {
-              const canPlay = view.phase === 'playing' && isMyTurn && legalSet.has(card);
-              return (
-                <PlayingCard
-                  key={card}
-                  card={card}
-                  isTrump={
-                    view.contract !== null &&
-                    view.contract.strain !== 'BOY' &&
-                    card.endsWith(view.contract.strain)
-                  }
-                  playable={canPlay}
-                  disabled={!canPlay}
-                  onClick={() => void sendIntent({ type: 'PLAY', card })}
-                  className={i > 0 ? '-ml-3 sm:-ml-6' : ''}
-                />
-              );
-            })}
-          </div>
-        </section>
-      )}
 
       {/* Floating Collapsible Chat */}
       {side && (
