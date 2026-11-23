@@ -368,7 +368,7 @@ export function BazarBlotTable({
                     <div
                       key={card}
                       style={{ transform: `translateY(${yPx}px) rotate(${deg}deg)` }}
-                      className={`transition-transform duration-150 hover:z-20 ${
+                      className={`transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:z-30 ${
                         i > 0 ? '-ml-3 sm:-ml-6' : ''
                       }`}
                     >

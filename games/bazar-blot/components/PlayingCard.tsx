@@ -198,7 +198,7 @@ export function PlayingCard({
   const label = `Play ${rank} of ${strings.suits[suit]}`;
 
   const faceBg = onClick && (!playable || disabled) ? 'bg-[#c9c3b8]' : 'bg-[#faf6ee]';
-  const baseClass = `${dims} ${className} relative flex flex-col justify-between border ${faceBg} font-bold shadow-md select-none transition-transform duration-150 ${colorClass} ${
+  const baseClass = `${dims} ${className} relative flex flex-col justify-between border ${faceBg} font-bold shadow-md select-none transition-[transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] ${colorClass} ${
     isTrump ? 'ring-2 ring-brass border-brass' : 'border-black/25'
   }`;
 
@@ -227,7 +227,7 @@ export function PlayingCard({
         onClick={onClick}
         className={`${baseClass} ${
           playable && !disabled
-            ? 'cursor-pointer hover:z-20 hover:-translate-y-4 hover:shadow-xl focus-visible:z-20 focus-visible:-translate-y-4 focus-visible:outline-2 focus-visible:outline-brass'
+            ? 'cursor-pointer hover:z-30 hover:-translate-y-6 hover:scale-105 hover:shadow-[0_16px_28px_rgba(0,0,0,0.5)] focus-visible:z-30 focus-visible:-translate-y-6 focus-visible:scale-105 focus-visible:outline-2 focus-visible:outline-brass'
             : 'cursor-default'
         }`}
       >
